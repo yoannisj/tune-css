@@ -7,6 +7,10 @@ bower_components
 ._*
 Thumbs.db
 
+# Play around during development
+play.js
+stylesheets/_play.scss
+
 # Exclude IDE management files.
 # Eclipse
 .project
