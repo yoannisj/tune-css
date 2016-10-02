@@ -1,0 +1,55 @@
+/**
+ * = Tune-css Root
+ * ============================================================================
+ */
+
+@import "helpers/support";
+
+/**
+ * ----------------------------------------------------------------------------
+ * Normalize.css
+ * 1. Add the correct display in IE <10.
+ * 2. Add the correct display in Edge, IE, and Firefox <49 for `details` and `summary`.
+ * 3. Add the correct display in IE for `main`.
+ */
+
+%tune-html5-block {
+  display: block; /* [1, 2, 3] */
+}
+
+@if support-for('ie', 9)
+{
+  article,
+  aside,
+  figcaption,
+  figure,
+  footer,
+  header,
+  main,
+  menu,
+  nav,
+  section,
+  summary {
+    @extend %tune-html5-block; // [1]
+  }
+}
+
+@if support-browser('ie')
+  or support-browser('edge')
+  or support-browser('op_mini')
+  or support-for('firefox', 48)
+{
+  details,
+  summary {
+   @extend %tune-html5-block; // [2]
+  }
+}
+
+@if support-browser('ie') 
+  or support-browser('edge')
+  or support-browser('op_mini')
+{
+  main {
+    @extend %tune-html5-block; // [3]
+  }
+}

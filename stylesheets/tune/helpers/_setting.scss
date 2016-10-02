@@ -1,0 +1,18 @@
+// ============================================================================
+// Tune-css Setting Helper
+// ============================================================================
+
+@import "settings";
+
+// Defaults injected by Tune-css
+$_tune-settings: map-merge((
+), $tune-settings);
+
+/// tune-setting($name)
+/// ---------------------------------------------------------------------------
+/// Returns the value of a Tune.css specific setting
+
+@function tune-setting($name)
+{
+  @return map-get($_tune-settings, $name);
+}

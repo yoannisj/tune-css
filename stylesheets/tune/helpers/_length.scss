@@ -1,0 +1,53 @@
+// ============================================================================
+// Tune-css Length Helpers
+// ============================================================================
+
+@import "settings";
+@import "aleksi/lengths/convert";
+
+/// length($val, $unit[, $args... ])
+/// ---------------------------------------------------------------------------
+/// Converts a length value in the given unit, using the conversion functions
+/// defined by the end-user.
+
+@function tune-length($val, $unit, $args...)
+{
+  // use end-user defined function to convert length
+  $fn:_tune-unit-fn($unit);
+  // $args: prepend($args, $val);
+  @return call($fn, $val, $args...);
+}
+
+/// _tune-unit-fn($val, $unit[, $args... ])
+/// ---------------------------------------------------------------------------
+/// Returns the unit conversion function, as defined by end-user
+
+// Defaults injected by Tune-css
+$_tune-unit-functions: map-merge((
+  'em': 'to-em',
+  'rem': 'to-rem',
+  '%': 'to-percent',
+  'px': 'to-px',
+  'in': 'to-in',
+  'mm': 'to-mm',
+  'cm': 'to-cm',
+  'pt': 'to-pt',
+  'pc': 'to-pc',
+), $tune-unit-functions);
+
+@function _tune-unit-fn($unit)
+{
+  // check if end-user defined a unit conversion function
+  $fn: map-get($_tune-unit-functions, $unit);
+
+  // warn if function was not found or does not exist
+  @if not $fn or not function-exists($fn) {
+    @warn "_tune-unit-fn(): unknown conversion function for unit `#{$unit}`."
+  }
+
+  @if $fn {
+    @return $fn
+  }
+
+  @return null;
+}
