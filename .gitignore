@@ -1,13 +1,11 @@
-
+# Project Dependencies
+node_modules
+bower_components
 
 # Exclude hidden OS files.
 .DS_Store
 ._*
 Thumbs.db
-
-# dependencies
-node_modules
-bower_components
 
 # Exclude IDE management files.
 # Eclipse
