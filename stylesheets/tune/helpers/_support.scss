@@ -11,5 +11,9 @@
 
 @function support-browser($browser)
 {
-  @return map-has-key($support-for, $browser);
+  @if map-has-key($support-for, $browser) and map-get($support-for, $browser) {
+    @return true;
+  }
+  
+  @return false;
 }
