@@ -1,0 +1,15 @@
+// ============================================================================
+// Tune-css Browser-Support Helpers
+// ============================================================================
+
+// import "support-for" module
+@import "support-for";
+
+/// support-browser()
+/// ---------------------------------------------------------------------------
+/// Checks whether a given browser is supported (all versions).
+
+@function support-browser($browser)
+{
+  @return map-has-key($support-for, $browser);
+}

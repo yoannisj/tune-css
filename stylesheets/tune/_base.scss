@@ -1,0 +1,65 @@
+/**
+ * = Tune-css Root
+ * ============================================================================
+ */
+
+@import "settings";
+@import "aleksi/general/default-to";
+@import "helpers/support";
+@import "helpers/length";
+@import "helpers/setting";
+
+/**
+ * ----------------------------------------------------------------------------
+ * Normalize.css
+ * 1. Change the default font family in all browsers (opinionated).
+ * 2. Prevent adjustments of font size after orientation changes in IE and iOS.
+ *    @link https://developer.mozilla.org/en-US/docs/Web/CSS/text-size-adjust
+ * ----------------------------------------------------------------------------
+ * Tune.css
+ * 3. Using percentages allows users to change the base font-size on all
+ *    versions of IE, which is always the case on any other browser.
+ * 4. Setting root font-size in ems causes IE 6 to weirdly resize fonts.
+ * 5. Prevent's readability issues when the operating system's color scheme sets
+ *    the window background to a color which might make text unreadable.
+ *    @link http://24ways.org/2007/css-for-accessibility/
+ * ----------------------------------------------------------------------------
+ */
+
+html
+{
+  @if support-for(ie, 7) {
+    font-size: percentage($root-font-size / 16px); /* [3, 4] */
+  }
+
+  font-family: $base-font-family; /* [1] */
+
+  $text-inflation: default-to(tune-setting('allow-text-inflation', 100%));
+  @if $text-inflation != true
+  {
+    -ms-text-size-adjust: $text-inflation; /* [2] */
+    -webkit-text-size-adjust: $text-inflation; /* [2] */
+  }
+
+  color: $base-text-color; /* [5] */
+  background: $base-background-color; /* [5] */
+}
+
+/**
+ * ----------------------------------------------------------------------------
+ * Normalize.css
+ * 1. Remove the margin in all browsers (opinionated).
+ * ----------------------------------------------------------------------------
+ * Tune.css
+ * 2. Base font-size on 'body' instead of 'html' to increase 'rem/em' control
+ * ----------------------------------------------------------------------------
+ */
+
+body
+{
+  margin: 0; /* [1] */
+
+  @if $base-font-size != $root-font-size {
+    font-size: tune-length($base-font-size, 'em', $root-font-size); /* [2] */
+  }
+}

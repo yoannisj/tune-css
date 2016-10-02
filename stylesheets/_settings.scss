@@ -1,0 +1,44 @@
+// ============================================================================
+// = Tune-css Settings
+// ============================================================================
+
+// Common Settings
+// ----------------------------------------------------------------------------
+// usually also found in other Sass libraries
+
+// Normalize default font-family across browsers
+$base-font-family: 'sans-serif' !default;
+
+// Font-size to set on the 'body' element
+// - used to calculate 'em' values
+$base-font-size: 16px !default;
+
+// Font-size to set on the 'html' element
+// - used to calculate 'rem' values
+$root-font-size: $base-font-size !default;
+
+// Line-height to set on the 'body' element
+$base-line-height: 24px !default;
+
+// Background-color to set on the 'html' element
+// - override user default background color
+$base-background-color: #fff !default;
+
+// Color to set on the 'html' element
+// - override user default text color
+$base-text-color: #000 !default;
+
+// Tune-css Settings
+// ----------------------------------------------------------------------------
+// Specific to Tune.css
+
+$tune-settings: (
+  // whether to allow mobile browsers to adjust text size
+  // @link https://developer.mozilla.org/en-US/docs/Web/CSS/text-size-adjust
+  // - 'true' or 'auto' for default behaviour
+  // - '<percentage>' to set inflation amount
+  // - 'false' to disable inflation
+  // - 'none' to disable (also disable user zooming on webkit)
+  'allow-text-inflation': false,
+
+);
