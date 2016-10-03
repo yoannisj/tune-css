@@ -2,3 +2,46 @@
  * = Tune-css Text
  * ============================================================================
  */
+
+/**
+ * ----------------------------------------------------------------------------
+ * Normalize.css
+ * 1. Remove the bottom border in Firefox <40.
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ * ----------------------------------------------------------------------------
+ * Tune.css
+ * 2. Allow developers to customize abbreviation's default text decoration
+ * 3. Fallback to 'text-decoration-line' for browsers not supporting
+ *    shorthand and CSS3 'text-decoration-*' properties.
+ *    @link http://caniuse.com/#feat=text-decoration
+ * 4. Allow developers to further customize 'abbr' default styles
+ */
+
+// @Todo: check if text-decoration is correctly applied in modern browsers
+// without setting the 'text-decoration' property, or if this is just a fix for the
+// shortand
+
+@if mixin-exists('tune-abbr')
+{
+  abbr {
+    @include tune-abbr(); /* [4] */
+  }
+}
+
+abbr[title]
+{
+  @if support-for('firefox', 39) {
+    border-bottom: none; /* [1] */
+  }
+
+  @if support-browser('chrome', 'edge', 'ie', 'opera', 'safari')
+    or support-for('firefox', 5) or support-for('safari', 6)
+  {
+    $abbr-title-text-decoration: tune-setting('abrr-title-text-decoration', underline dotted);
+    @if length($abbr-title-text-decoration) >= 2 {
+      text-decoration: nth($abbr-title-text-decoration, 1); /* [2, 3, 4] */
+    }
+
+    text-decoration: $abbr-title-text-decoration; /* [2, 3] */
+  }
+}

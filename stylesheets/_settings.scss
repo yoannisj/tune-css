@@ -34,21 +34,30 @@ $base-text-color: #000 !default;
 
 $tune-settings: (
   // Customize how mobile browsers adjust text size. Used to disable text size
-  // adjustments on orientation change. [none]
+  // adjustments on orientation change.
   // @link https://developer.mozilla.org/en-US/docs/Web/CSS/text-size-adjust
   // - 'auto' or 'null' for default behaviour
   // - '<percentage>' to set custom inflation amount
   // - 'none' to disable inflation (tune-css will fix webkit bug)
+  // @default none
   'text-inflation': none,
 
   // Customize background of active links. Used to remove background on focused
-  // links in IE 10. [transparent]
+  // links in IE 10.
+  // @default transparent
   'link-background-active': transparent,
 
   // Customize outline of focused links [null]
   'link-outline-focus': null,
 
   // Customize outline of active and hovered links. Used to remove outline on
-  // focused links when also active or hovered. [0]
+  // focused links when also active or hovered.
+  // @default 0
   'link-outline-focus-active': 0,
+
+  // Customize text-decoration applied on abbreviations with a 'title' attribute.
+  // You can use the CSS3 text-decoration shorthand, but 'text-decoration-line' 
+  // MUST be specified, and in first position as it will be used as fallback.
+  // @default underline dotted
+  'abbr-title-text-decoration': underline dotted,
 );
