@@ -17,22 +17,25 @@
  *    @link https://developer.mozilla.org/en-US/docs/Web/CSS/text-size-adjust
  * ----------------------------------------------------------------------------
  * Tune.css
+ * 2. Allow developer to customize the text size adjustments on mobile
  * 3. Using percentages allows users to change the base font-size on all
- *    versions of IE, which is always the case on any other browser.
+ *    versions of IE (which is always the case on any other browser).
  * 4. Setting root font-size in ems causes IE 6 to weirdly resize fonts.
  * 5. Prevent's readability issues when the operating system's color scheme sets
  *    the window background to a color which might make text unreadable.
  *    @link http://24ways.org/2007/css-for-accessibility/
+ * 6. Allow developer to further tune default 'html' styles
  * ----------------------------------------------------------------------------
  */
 
 html
 {
+  font-family: $base-font-family; /* [1] */
+
   @if support-for(ie, 7) {
     font-size: percentage($root-font-size / 16px); /* [3, 4] */
   }
 
-  font-family: $base-font-family; /* [1] */
   $text-inflation: tune-setting('text-inflation', 100%);
 
   // fix bug in Webkit where 'none' would break the ability for users to zoom
@@ -42,6 +45,10 @@ html
 
   color: $base-text-color; /* [5] */
   background: $base-background-color; /* [5] */
+
+  @if mixin-exists('tune-root') {
+    @include tune-html(); /* [6] */
+  }
 }
 
 /**
@@ -51,6 +58,7 @@ html
  * ----------------------------------------------------------------------------
  * Tune.css
  * 2. Base font-size on 'body' instead of 'html' to increase 'rem/em' control
+ * 3. Allow developer to further tune default 'html' styles
  * ----------------------------------------------------------------------------
  */
 
@@ -60,5 +68,9 @@ body
 
   @if $base-font-size != $root-font-size {
     font-size: tune-length($base-font-size, 'em', $root-font-size); /* [2] */
+  }
+
+  @if mixin-exists('tune-body') {
+    @include tune-body(); /* [3] */
   }
 }

@@ -8,11 +8,11 @@
 /// length($val, $unit[, $args... ])
 /// ---------------------------------------------------------------------------
 /// Converts a length value in the given unit, using the conversion functions
-/// defined by the end-user.
+/// defined by the developer.
 
 @function tune-length($val, $unit, $args...)
 {
-  // use end-user defined function to convert length
+  // use developer defined function to convert length
   $fn:_tune-unit-fn($unit);
   // $args: prepend($args, $val);
   @return call($fn, $val, $args...);
@@ -20,7 +20,7 @@
 
 /// _tune-unit-fn($val, $unit[, $args... ])
 /// ---------------------------------------------------------------------------
-/// Returns the unit conversion function, as defined by end-user
+/// Returns the unit conversion function, as defined by developer
 
 // Defaults injected by Tune-css
 $_tune-unit-functions: map-merge((
@@ -37,7 +37,7 @@ $_tune-unit-functions: map-merge((
 
 @function _tune-unit-fn($unit)
 {
-  // check if end-user defined a unit conversion function
+  // check if developer defined a unit conversion function
   $fn: map-get($_tune-unit-functions, $unit);
 
   // warn if function was not found or does not exist
