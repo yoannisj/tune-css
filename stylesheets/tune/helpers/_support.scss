@@ -9,11 +9,15 @@
 /// ---------------------------------------------------------------------------
 /// Checks whether a given browser is supported (all versions).
 
-@function support-browser($browser)
+@function support-browser($browsers...)
 {
-  @if map-has-key($support-for, $browser) and map-get($support-for, $browser) {
-    @return true;
+  // return 'true' as soon as one of the given browsers is supported
+  @each $browser in $browsers {
+    // browsers with a value other then 'null' in $support-for are supported
+    @if map-has-key($support-for, $browser) and map-get($support-for, $browser) {
+      @return true;
+    }
   }
-  
+
   @return false;
 }

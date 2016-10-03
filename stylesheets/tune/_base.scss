@@ -32,7 +32,7 @@ html
 {
   font-family: $base-font-family; /* [1] */
 
-  @if support-for(ie, 7) {
+  @if support-for('ie', 7) {
     font-size: percentage($root-font-size / 16px); /* [3, 4] */
   }
 
