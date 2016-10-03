@@ -33,12 +33,25 @@ $base-text-color: #000 !default;
 // Specific to Tune.css
 
 $tune-settings: (
-  // whether to allow mobile browsers to adjust text size
+  // Customize how mobile browsers adjust text size. Used to disable text size
+  // adjustments on orientation change. [none]
   // @link https://developer.mozilla.org/en-US/docs/Web/CSS/text-size-adjust
-  // - 'true' or 'auto' for default behaviour
-  // - '<percentage>' to set inflation amount
-  // - 'false' to disable inflation
-  // - 'none' to disable (also disable user zooming on webkit)
-  'allow-text-inflation': false,
+  // - 'auto' or 'null' for default behaviour
+  // - '<percentage>' to set custom inflation amount
+  // - 'none' to disable inflation (tune-css will fix webkit bug)
+  'text-inflation': none,
 
+  // Customize background of active links. Used to remove background on focused
+  // links in IE 10. [transparent]
+  'link-background-active': transparent,
+
+  // Customize outline of focused links [null]
+  'link-outline-focus': null,
+
+  // Customize outline of active and hovered links. Used to remove outline on
+  // focused links when also active or hovered. [0]
+  'link-outline-focus-active': 0,
 );
+
+
+

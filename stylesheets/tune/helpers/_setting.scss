@@ -4,15 +4,16 @@
 
 @import "settings";
 
-// Defaults injected by Tune-css
-$_tune-settings: map-merge((
-), $tune-settings);
-
 /// tune-setting($name)
 /// ---------------------------------------------------------------------------
-/// Returns the value of a Tune.css specific setting
+/// Returns the value of a Tune.css specific setting, or uses a given default
+/// value if the setting is not defined
 
-@function tune-setting($name)
+@function tune-setting($name, $default: null)
 {
-  @return map-get($_tune-settings, $name);
+  @if map-has-key($tune-settings, $name) {
+    @return map-get($tune-setting, $name);
+  }
+
+  @return $default;
 }
