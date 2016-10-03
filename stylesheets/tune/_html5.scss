@@ -3,7 +3,7 @@
  * ============================================================================
  */
 
-@import "helpers/support";
+@import "tune/helpers/support";
 
 /**
  * ----------------------------------------------------------------------------
@@ -18,7 +18,7 @@
   display: block; /* [1, 2, 3] */
 }
 
-@if support-for('ie', 9)
+@if tune-supports('ie' 9)
 {
   article,
   aside,
@@ -35,7 +35,7 @@
   }
 }
 
-@if support-browser('ie', 'edge', 'op_mini') or support-for('firefox', 48)
+@if tune-supports('ie', 'edge', 'op_mini', 'firefox' 48)
 {
   details,
   summary {
@@ -49,7 +49,7 @@
   }
 }
 
-@if support-for('ie', 9)
+@if tune-supports('ie' 9)
 {
 /**
  * ----------------------------------------------------------------------------
@@ -64,7 +64,7 @@
   video {
     display: inline-block; /* [1] */
     
-    @if support-for(ie, 7) {
+    @if tune-supports('ie' 7) {
       *display: inline; /* [1] */
       *zoom: 1; /* [1] */
     }
@@ -86,7 +86,8 @@ audio:not([controls])
   height: 0; /* [1] */
 }
 
-@if support-browser('chrome', 'firefox', 'opera') {
+@if tune-supports('chrome', 'firefox', 'opera')
+{
 /**
  * ----------------------------------------------------------------------------
  * Normalize.css
@@ -111,17 +112,14 @@ audio:not([controls])
   display: none;
 }
 
-@if support-for('ie', 10)
-  or support-for('safari', 7)
-  or support-for('firefox', 22)
+@if tune-supports('ie' 10, 'safari' 7, 'firefox' 22)
 {
-
   template {
     @extend %tune-html5-hidden; /* [1] */
   }
 }
 
-@if support-browser('ie')
+@if tune-supports('ie')
 {
   [hidden] {
     @extend %tune-html5-hidden; /* [2] */

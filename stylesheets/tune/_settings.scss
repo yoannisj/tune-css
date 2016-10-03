@@ -6,6 +6,11 @@
 // ----------------------------------------------------------------------------
 // usually also found in other Sass libraries
 
+// map of browsers to support. Each entry should be a browser name mapping to
+// the minimum version to support. Browsers mapping to 'null' and browsers
+// not found in the list or considered unsupported.
+$support-for: () !default;
+
 // Normalize default font-family across browsers
 $base-font-family: 'sans-serif' !default;
 
@@ -47,7 +52,8 @@ $tune-settings: (
   // @default transparent
   'link-background-active': transparent,
 
-  // Customize outline of focused links [null]
+  // Customize outline applied to focused links [null].
+  // @default null
   'link-outline-focus': null,
 
   // Customize outline of active and hovered links. Used to remove outline on
@@ -55,9 +61,25 @@ $tune-settings: (
   // @default 0
   'link-outline-focus-active': 0,
 
-  // Customize text-decoration applied on abbreviations with a 'title' attribute.
+  // Customize text-decoration applied on 'abbr' elements with a title.
   // You can use the CSS3 text-decoration shorthand, but 'text-decoration-line' 
   // MUST be specified, and in first position as it will be used as fallback.
+  // Used to normalize text-decoration on 'abbr[title]' elements
   // @default underline dotted
   'abbr-title-text-decoration': underline dotted,
+
+  // Customize font-weight used on 'b' and 'strong' elements. Used to normalize
+  // font-weight applied to 'b' and 'strong' elements accros browsers.
+  // @default bolder
+  'strong-font-weight': bolder,
+
+  // Customize font-family used on elements defaulting to monospace font.
+  // Used to prevent browsers from resizing default monospace fonts.
+  // @default monospace
+  'monospace-font-family': monospace,
+
+  // Customize font-size used on elements defaulting to monospace font.
+  // Used to prevent browsers from resizing default monospace fonts.
+  // @default $base-font-size
+  'monospace-font-size': $base-font-size
 );

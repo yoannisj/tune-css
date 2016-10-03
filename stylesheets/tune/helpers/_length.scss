@@ -2,7 +2,8 @@
 // Tune-css Length Helpers
 // ============================================================================
 
-@import "settings";
+@import "tune/settings";
+@import "tune/settings";
 @import "aleksi/lengths/convert";
 
 /// length($val, $unit[, $args... ])

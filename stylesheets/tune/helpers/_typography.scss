@@ -1,0 +1,25 @@
+// ============================================================================
+// Tune-css Typography Helpers
+// ============================================================================
+
+/// tune-monospace-family( $family )
+/// ---------------------------------------------------------------------------
+/// appends 'monospace' to the given monospace font-family to avoid font
+/// resizing by all major browsers.
+// @link http://code.stephenmorley.org/html-and-css/fixing-browsers-broken-monospace-font-handling/
+
+@function tune-monospace-family( $family )
+{
+  // repeat default 'monospace' family
+  @if $family == monospace {
+    @return (monospace, monospace);
+  }
+
+  // make sure the last item in the font family is 'monospace'
+  @if index($family, monospace) != length($family) {
+    @return append($family, monospace);
+  }
+
+  @return $family;
+}
+

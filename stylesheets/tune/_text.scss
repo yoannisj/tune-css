@@ -3,6 +3,11 @@
  * ============================================================================
  */
 
+@import "tune/helpers/support";
+@import "tune/helpers/setting";
+@import "tune/helpers/length";
+@import "tune/helpers/hook";
+
 /**
  * ----------------------------------------------------------------------------
  * Normalize.css
@@ -10,38 +15,98 @@
  * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
  * ----------------------------------------------------------------------------
  * Tune.css
- * 2. Allow developers to customize abbreviation's default text decoration
- * 3. Fallback to 'text-decoration-line' for browsers not supporting
+ * 3. Allow developers to customize abbreviation's default text decoration
+ * 4. Fallback to 'text-decoration-line' for browsers not supporting
  *    shorthand and CSS3 'text-decoration-*' properties.
  *    @link http://caniuse.com/#feat=text-decoration
- * 4. Allow developers to further customize 'abbr' default styles
+ * 5. Allow developers to further customize 'abbr' default styles
  */
 
 // @Todo: check if text-decoration is correctly applied in modern browsers
-// without setting the 'text-decoration' property, or if this is just a fix for the
-// shortand
+// without setting the 'text-decoration' property twice, or if this is just a
+// fix for the shortand
 
-@if mixin-exists('tune-abbr')
+abbr
 {
-  abbr {
-    @include tune-abbr(); /* [4] */
-  }
-}
-
-abbr[title]
-{
-  @if support-for('firefox', 39) {
+  @if tune-supports('firefox' 39) {
     border-bottom: none; /* [1] */
   }
 
-  @if support-browser('chrome', 'edge', 'ie', 'opera', 'safari')
-    or support-for('firefox', 5) or support-for('safari', 6)
+  &[title]
   {
-    $abbr-title-text-decoration: tune-setting('abrr-title-text-decoration', underline dotted);
-    @if length($abbr-title-text-decoration) >= 2 {
-      text-decoration: nth($abbr-title-text-decoration, 1); /* [2, 3, 4] */
-    }
+    $abbr-title-text-decoration: tune-setting('tune-abbr-title-text-decoration', underline dotted);
+    @include tune-text-decoration($abbr-title-text-decoration); /* [2, 3, 4] */
 
-    text-decoration: $abbr-title-text-decoration; /* [2, 3] */
+    @if tune-has-hook('tune-abbr') {
+      @include tune-abbr(); /* [5] */
+    }
+  }
+}
+
+@if tune-setting('strong-font-weight') == bolder
+  and tune-supports('safari', 6)
+{
+  /**
+    * ----------------------------------------------------------------------------
+   * Normalize.css
+   * 1. Prevent the duplicate application of `bolder` by next rule in Safari 6.
+   * ----------------------------------------------------------------------------
+   */
+
+  b, strong {
+    font-weight: inherit; /* [1] */
+  }
+}
+
+/**
+ * ----------------------------------------------------------------------------
+ * Normalize.css
+ * 1. Add the correct font weight in Chrome, Edge, and Safari.
+ * ----------------------------------------------------------------------------
+ * Tune.css
+ * 2. Allow developer to cusotmize the 'b' and 'strong' font-weight
+ * ----------------------------------------------------------------------------
+ */
+
+@if tune-supports('chrome', 'edge', 'safari')
+  or tune-setting('strong-font-weight')
+{
+  b,
+  strong {
+    font-weight: tune-setting('strong-font-weight', bolder); /* [1, 2] */
+  }
+}
+
+// see 'tune/partials/monospace' for details
+@import "tune/partials/monospace";
+
+code,
+kbd,
+samp
+{
+  @extend %tune-monospace;
+}
+
+@if tune-supports('android' 4)
+  or tune-setting('dfn-font-style')
+  or tune-has-hook('tune-dfn')
+{
+  /**
+   * ----------------------------------------------------------------------------
+   * Normalize.css
+   * 1. Add the correct font style in Android <4.4.
+   * ----------------------------------------------------------------------------
+   * Tune.css
+   * 2. Allow developer to customize the 'dfn' font-style
+   * 3. Allow developer to further customize the 'dfn' default styles
+   * ----------------------------------------------------------------------------
+   */
+
+  dfn {
+    font-style: tune-setting('dfn-font-style', italic); /* [1, 2] */
+
+    @if tune-has-hook('tune-dfn') {
+      @include tune-dfn;
+    }
   }
 }
