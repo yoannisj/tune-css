@@ -1,0 +1,27 @@
+// ============================================================================
+// Tune-css Vertical Rhythm Partial
+// ============================================================================
+
+@import "tune/helpers/setting";
+@import "tune/helpers/typography";
+
+/**
+ * ----------------------------------------------------------------------------
+ * Tune.css
+ * 
+ * @link http://csswizardry.com/2012/06/single-direction-margin-declarations/
+ * ----------------------------------------------------------------------------
+ */
+
+%tune-vertical-rhythm
+{
+  $tune-vertical-rhythm-unit: tune-setting('vertical-rhythm-unit', $base-line-height);
+  @include tune-vertical-margin($tune-vertical-rhythm-unit, 'rem');
+}
+
+// h1, h2, h3, h4, h5, h6,
+// ul, ol, dd,
+// p, figure,
+// pre, table, fieldset, hr {
+//   @extend %tune-vertical-rhythm;
+// }

@@ -36,7 +36,7 @@ a
     outline: tune-setting('link-outline-focus-active', 0); /* [3, 4] */
   }
 
-  @if tune-has-hook('tune-links') {
+  @if tune-has-hook('links') {
     @include tune-links(); /* [5] */
   }
 }

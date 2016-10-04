@@ -119,7 +119,7 @@ audio:not([controls])
   }
 }
 
-@if tune-supports('ie')
+@if tune-supports('ie', 'op_mini')
 {
   [hidden] {
     @extend %tune-html5-hidden; /* [2] */

@@ -7,6 +7,7 @@
 @import "tune/helpers/setting";
 @import "tune/helpers/length";
 @import "tune/helpers/hook";
+@import "tune/helpers/typography";
 
 /**
  * ----------------------------------------------------------------------------
@@ -37,7 +38,7 @@ abbr
     $abbr-title-text-decoration: tune-setting('tune-abbr-title-text-decoration', underline dotted);
     @include tune-text-decoration($abbr-title-text-decoration); /* [2, 3, 4] */
 
-    @if tune-has-hook('tune-abbr') {
+    @if tune-has-hook('abbr') {
       @include tune-abbr(); /* [5] */
     }
   }
@@ -58,22 +59,22 @@ abbr
   }
 }
 
-/**
- * ----------------------------------------------------------------------------
- * Normalize.css
- * 1. Add the correct font weight in Chrome, Edge, and Safari.
- * ----------------------------------------------------------------------------
- * Tune.css
- * 2. Allow developer to cusotmize the 'b' and 'strong' font-weight
- * ----------------------------------------------------------------------------
- */
-
 @if tune-supports('chrome', 'edge', 'safari')
   or tune-setting('strong-font-weight')
 {
+  /**
+   * ----------------------------------------------------------------------------
+   * Normalize.css
+   * 1. Add the correct font weight in Chrome, Edge, and Safari.
+   * ----------------------------------------------------------------------------
+   * Tune.css
+   * 2. Allow developer to cusotmize the 'b' and 'strong' font-weight
+   * ----------------------------------------------------------------------------
+   */
+
   b,
   strong {
-    font-weight: tune-setting('strong-font-weight', bolder); /* [1, 2] */
+    font-weight: tune-setting('strong-font-weight'); /* [1, 2] */
   }
 }
 
@@ -89,7 +90,7 @@ samp
 
 @if tune-supports('android' 4)
   or tune-setting('dfn-font-style')
-  or tune-has-hook('tune-dfn')
+  or  tune-has-hook('dfn')
 {
   /**
    * ----------------------------------------------------------------------------
@@ -103,10 +104,90 @@ samp
    */
 
   dfn {
-    font-style: tune-setting('dfn-font-style', italic); /* [1, 2] */
+    @if tune-supports('android' 4) {
+      font-style: tune-setting('dfn-font-style', italic); /* [1, 2] */
+    }
 
-    @if tune-has-hook('tune-dfn') {
+    @if tune-has-hook('dfn') {
       @include tune-dfn;
     }
   }
+}
+
+@if tune-supports('ie' 9)
+  or  tune-has-hook('mark')
+{
+  /**
+   * ----------------------------------------------------------------------------
+   * Normalize.css
+   * 1. Add the correct background and color in IE <10.
+   * ----------------------------------------------------------------------------
+   * 2. Allow developer to customize default 'mark' background and color
+   */
+
+  mark {
+    @if tune-supports('ie' 9) {
+      background: tune-setting('mark-background', #ff0); /* [1, 2] */
+      color: tune-setting('mark-color', #000); /* [1, 2] */
+    }
+
+    @if tune-has-hook('mark') {
+      @include tun-mark;
+    }
+  }
+}
+
+/**
+ * ----------------------------------------------------------------------------
+ * Normalize.css
+ * 1. Add the correct font size in all browsers.
+ * ----------------------------------------------------------------------------
+ * Tune.css
+ * 2. Allow developers to customize 'small' default font-size
+ * ----------------------------------------------------------------------------
+ */
+
+small {
+  $small-font-size: tune-setting('small-font-size', 80%);
+  font-size: tune-length($small-font-size, '%'); /* [1, 2] */
+}
+
+/**
+ * ----------------------------------------------------------------------------
+ * Normalize.css
+ * 1. Prevent `sub` and `sup` elements from affecting the line height in
+ *    all browsers.
+ * ----------------------------------------------------------------------------
+ * Tune.css
+ * 2. Allow developer to customize 'sub' and 'sup' default font-size
+ * ----------------------------------------------------------------------------
+ */
+
+// @TODO: test sub and sup offset with other 'sub-sup-font-size' and find
+// formula to correct it if necessary. Maybe the following?
+// $sub-offset: 100% - $sub-sup-font-size;
+// $sup-offset: 50% + $sub-offset - $sub-sup-font-size;
+// Actually, since offsets are in 'em' they are already relative to
+// 'sub-sup-font-size' and therefore should not change..
+// It could depend on the font and then it should be a setting
+
+sub,
+sup {
+  $sub-sup-font-size: tune-setting('sub-sup-font-size', 75%);
+  font-size: tune-length($sub-sup-font-size, '%'); /* [1, 2] */
+  line-height: 0; /* [1] */
+  position: relative; /* [1] */
+  vertical-align: baseline; /* [1] */
+
+  @if tune-has-hook('sub-sup') {
+    @include tune-sub-sup;
+  }
+}
+
+sub {
+  bottom: -0.25em; /* [1] */
+}
+
+sup {
+  top: -0.5em; /* [1] */
 }

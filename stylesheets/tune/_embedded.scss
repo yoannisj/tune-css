@@ -3,7 +3,36 @@
  * ============================================================================
  */
 
-/**
- * =fluid embeds
- * -------------
-**/
+@import "tune/helpers/support";
+
+@if tune-supports('ie' 10)
+{
+  /**
+   * ----------------------------------------------------------------------------
+   * Normalize.css
+   * 1. Remove the border on images inside links in IE <11.
+   * 2. Improve image quality when scaled in IE 7.
+   * ----------------------------------------------------------------------------
+   */
+
+  img {
+    border-style: none; /* [1] */
+    @if tune-supports('ie' 7) {
+      -ms-interpolation-mode: bicubic; /* [2] */
+    }
+  }
+}
+
+@if tune-supports('ie')
+{
+  /**
+   * ----------------------------------------------------------------------------
+   * Normalize.css
+   * 1. Hide the overflow in IE.
+   * ----------------------------------------------------------------------------
+   */
+
+  svg:not(:root) {
+    overflow: hidden; /* [1] */
+  }
+}

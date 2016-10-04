@@ -7,5 +7,5 @@
 /// Checks whether a hook mixin is available
 
 @function tune-has-hook($name) {
-  @return mixin-exists($name);
+  @return mixin-exists('tune-#{$name}');
 }

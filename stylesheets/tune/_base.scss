@@ -46,7 +46,7 @@ html
   color: $base-text-color; /* [5] */
   background: $base-background-color; /* [5] */
 
-  @if tune-has-hook('tune-root') {
+  @if   tune-has-hook('root') {
     @include tune-html(); /* [6] */
   }
 }
@@ -70,7 +70,7 @@ body
     font-size: tune-length($base-font-size, 'em', $root-font-size); /* [2] */
   }
 
-  @if tune-has-hook('tune-body') {
+  @if   tune-has-hook('body') {
     @include tune-body(); /* [3] */
   }
 }

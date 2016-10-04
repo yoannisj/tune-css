@@ -2,6 +2,41 @@
 // Tune-css Typography Helpers
 // ============================================================================
 
+@import "aleksi/sides/side-value";
+@import "tune/helpers/length";
+
+/// tune-vertical-margin( $margins )
+/// ---------------------------------------------------------------------------
+
+@mixin tune-vertical-margin( $margin, $unit, $args...)
+{
+  @if not tune-setting('single-direction-margins') {
+    $top: side-value($margin, 'top');
+    @include tune-length('margin-top', $top, $unit, $args...);
+  }
+
+  @else {
+    margin-top: 0;
+  }
+
+  $bottom: side-value($margin, 'bottom');
+  @include tune-length('margin-bottom', $bottom, $unit, $args...);
+}
+
+/// tune-typescale( $font-size, $line-height, $args... )
+/// ---------------------------------------------------------------------------
+
+@mixin tune-typescale($font-size, $line-height: null, $args...)
+{
+  font-size: tune-length($font-size, 'em', $args...);
+
+  // optionally include line-height (as unitless ratio)
+  @if $line-height {
+    $fs: tune-length($font-size, 'px', $args...);
+    line-height: tune-length($line-height, 'px', $fs) / $fs;
+  }
+}
+
 /// tune-monospace-family( $family )
 /// ---------------------------------------------------------------------------
 /// appends 'monospace' to the given monospace font-family to avoid font
@@ -21,5 +56,35 @@
   }
 
   @return $family;
+}
+
+/// tune-monospace-family( $family )
+/// ---------------------------------------------------------------------------
+/// Includes monospace font-family. Adds 'monospace' to the given font-family
+/// to avoid font resizing by all major browsers.
+// @link http://code.stephenmorley.org/html-and-css/fixing-browsers-broken-monospace-font-handling/
+
+@mixin tune-monospace-family( $family )
+{
+  font-face: tune-monospace-family($family);
+}
+
+/// tune-text-decoration( $decoration )
+/// ---------------------------------------------------------------------------
+/// Includes text-decoration. Includes 'text-decoration-line' fallback for
+/// browsers not supporting the 'text-decoration' shorthand.
+/// @link http://caniuse.com/#feat=text-decoration
+
+@mixin tune-text-decoration( $decoration ) 
+{
+  // if using shorthand for browsers not supporting it
+  @if tune-supports('chrome', 'edge', 'ie', 'opera', 'safari', 'firefox' 5, 'safari' 6)
+    and length($decoration) >= 2
+  {
+    // Include first 'text-decoration-line' value as fallback
+    text-decoration: nth($decoration, 1);
+  }
+
+  text-decoration: $decoration;
 }
 
