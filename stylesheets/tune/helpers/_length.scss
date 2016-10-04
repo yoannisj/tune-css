@@ -2,10 +2,10 @@
 // Tune-css Length Helpers
 // ============================================================================
 
-@import "settings";
 @import "aleksi/lengths/convert";
+@import "tune/settings";
 
-/// length($val, $unit[, $args... ])
+/// tune-length($val, $unit[, $args... ])
 /// ---------------------------------------------------------------------------
 /// Converts a length value in the given unit, using the conversion functions
 /// defined by the developer.
@@ -16,6 +16,25 @@
   $fn:_tune-unit-fn($unit);
   // $args: prepend($args, $val);
   @return call($fn, $val, $args...);
+}
+
+/// tune-length($val, $unit[, $args... ])
+/// ---------------------------------------------------------------------------
+/// Includes the given css property with a length value, converted into the
+/// given unit using the conversion functions defined by the developer.
+
+@mixin tune-length($property, $val, $unit, $args...)
+{
+  // accept 'null', in which case no length conversion will be made
+  @if $val != null
+  {
+    // include 'rem' fallbacks for IE8 and smaller
+    @if $unit == 'rem' and tune-supports('ie' 8) {
+      #{$property}: tune-length($val, 'px', $args...);
+    }
+
+    #{$property}: tune-length($val, $unit, $args...);
+  }
 }
 
 /// _tune-unit-fn($val, $unit[, $args... ])

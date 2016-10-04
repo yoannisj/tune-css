@@ -2,7 +2,7 @@
 // Tune-css Setting Helper
 // ============================================================================
 
-@import "settings";
+@import "tune/settings";
 
 /// tune-setting($name)
 /// ---------------------------------------------------------------------------
@@ -12,7 +12,7 @@
 @function tune-setting($name, $default: null)
 {
   @if map-has-key($tune-settings, $name) {
-    @return map-get($tune-setting, $name);
+    @return map-get($tune-settings, $name);
   }
 
   @return $default;

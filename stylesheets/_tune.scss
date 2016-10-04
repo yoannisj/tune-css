@@ -8,15 +8,21 @@
 
 // Utils
 // ============================================================================
-@import "settings";
+
+@import "tune/settings";
+@import "tune/settings";
 @import "support-for";
 
 // Sections
 // ============================================================================
+
 @import "tune/base";
 @import "tune/html5";
-@import "tune/text";
-@import "tune/links";
+
 @import "tune/grouping";
 @import "tune/embedded";
 @import "tune/forms";
+
+@import "tune/headings";
+@import "tune/links";
+@import "tune/text";
