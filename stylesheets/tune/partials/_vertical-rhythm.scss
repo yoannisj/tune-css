@@ -2,21 +2,30 @@
 // Tune-css Vertical Rhythm Partial
 // ============================================================================
 
+@import "aleksi/sides/side-value";
 @import "tune/helpers/setting";
-@import "tune/helpers/typography";
 
 /**
  * ----------------------------------------------------------------------------
  * Tune.css
- * 
- * @link http://csswizardry.com/2012/06/single-direction-margin-declarations/
+ * 1. Set default vertical rhythm once on block-level grouping elements
+ *    @link http://csswizardry.com/2012/06/single-direction-margin-declarations/
+ * 2. Allow developer to customize margin used for vertical rhythm
  * ----------------------------------------------------------------------------
  */
 
 %tune-vertical-rhythm
 {
-  $tune-vertical-rhythm-unit: tune-setting('vertical-rhythm-unit', $base-line-height);
-  @include tune-vertical-margin($tune-vertical-rhythm-unit, 'rem');
+  $margin: tune-setting('vertical-rhythm-margin', $base-line-height);
+
+  // output 'top' and 'bottom' margin values
+  @if tune-setting('single-direction-margin') {
+    margin-top: 0; /* [1] */
+  } @else {
+    margin-top: side-value($margin, 'top'); /* [1, 2] */
+  }
+
+  margin-bottom: side-value($margin, 'bottom'); /* [1, 2] */
 }
 
 // h1, h2, h3, h4, h5, h6,

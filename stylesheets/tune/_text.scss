@@ -114,6 +114,58 @@ samp
   }
 }
 
+@if tune-setting('q-glyph-before')
+  or tune-setting('q-glyph-after')
+  or tune-supports('safari' 4)
+  or tune-supports('ie' 7)
+{
+  /**
+   * ----------------------------------------------------------------------------
+   * Normalize.css
+   * 1. Address CSS quotes not supported in IE 6/7.
+   * 2. Address `quotes` property not supported in Safari 4.
+   * ----------------------------------------------------------------------------
+   * Tune.css
+   * 3. Quotes can not be applied via CSS to ie < 8 so, better remove the CSS
+   *    quotes and add them using Html if we need to support ie < 8.
+   * 4. Normalize glyphs inserted before and after 'q' elements.
+   * 5. Allow developers to customize glyphs inserted before and after 'q'
+   *    elements by default (does not work if support for IE < 7).
+   * ----------------------------------------------------------------------------
+   */
+
+  q
+  {
+    @if tune-supports('ie' 7)
+    {
+      quotes: none; /* [1, 3] */
+      
+      @if tune-supports('safari' 4)
+      {
+        &:before, &:after {
+          content: ""; /* [2, 3] */
+          content: none; /* [2, 3] */
+        }
+      }
+    }
+
+    @else if tune-supports('safari' 4)
+    {
+      quotes: none; /* [2] */
+      &:before {
+        content: "#{tune-setting('q-glyph-before', «)}"; /* [2, 4, 5] */
+      }
+      &:after {
+        content: "#{tune-setting('q-glyph-after', »)}"; /* [2, 4, 5] */
+      }
+    }
+
+    @else {
+      quotes: "#{tune-setting('q-glyph-before', «)}" "#{tune-setting('q-glyph-after', »)}"; /* [4, 5] */
+    }
+  }
+}
+
 @if tune-supports('ie' 9)
   or  tune-has-hook('mark')
 {

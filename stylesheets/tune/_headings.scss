@@ -30,18 +30,17 @@
     font-weight: tune-setting('heading-font-weight'); /* [2] */
     text-rendering: tune-setting('heading-text-rendering', optimizeLegibility); /* [1, 2] */
 
-    @if tune-setting('vertical-rhythm') {
-      @extend %tune-vertical-rhythm;
-    }
-
     @if tune-has-hook('heading') {
       @include tune-heading; /* [3] */
     }
   }
 }
 
-@if tune-supports('chrome', 'firefox', 'safari')
-  or tune-supports('ie' 6, 'ie' 7)
+@if tune-setting('h1-font-size')
+  or tune-setting('h1-line-height')
+  or tune-setting('h1-margin')
+  or tune-supports('chrome', 'firefox', 'safari')
+  or tune-supports('ie' 7)
 {
 
 /**
@@ -58,32 +57,38 @@
  * ----------------------------------------------------------------------------
  */
 
-  h1
+  h1 /* [5] */
   {
     $h1-font-size: tune-setting('h1-font-size');
     $h1-line-height: tune-setting('h1-line-height');
     @include tune-typescale($h1-font-size, $h1-line-height); /* [1, 2, 3] */
 
-    @if not tune-setting('vertical-rhythm') {
-      $h1-vertical-margin: tune-setting('h1-vertical-margin', 0.67em);
-      @include tune-vertical-margin($h1-vertical-margin, 'em', $h1-font-size); /* [4] */
+    @if tune-setting('vertical-margin') or tune-setting('h1-margin') {
+      @include tune-margin(tune-setting('h1-margin'));
+    }
+
+    @else if tune-supports('ie' 7) {
+     @include tune-margin(tune-setting('h1-margin'), 'em');
     }
   }
 }
 
-@if tune-setting('typeset-headings') or tune-supports('ie' 6, 'ie' 7)
+@if tune-setting('typeset-headings') or tune-supports('ie' 7)
 {
   @for $i from 2 through 6
   {
-    h#{$i}
+    h#{$i} /* [5] */
     {
       $font-size: tune-setting('h#{$i}-font-size');
       $line-height: tune-setting('h#{$i}-line-height');
       @include tune-typescale($font-size, $line-height); /* [2, 3] */
 
-      @if not tune-setting('vertical-rhythm') {
-        $vertical-margin: tune-setting('h#{$i}-vertical-margin');
-        @include tune-vertical-margin($vertical-margin, 'em', $font-size);
+      @if tune-setting('vertical-margin') or tune-setting('h#{$i}-margin') {
+        @include tune-margin(tune-setting('h#{$i}-margin')); /* [4] */
+      }
+
+      @else if tune-supports('ie' 7) {
+        @include tune-margin(tune-setting('h#{$i}-margin'), 'em'); /* [4] */
       }
     }
   }
@@ -91,10 +96,10 @@
 
 @if tune-setting('heading-classnames')
 {
-  .h1 /* [5] */ { @extend h1; }
-  .h2 /* [5] */ { @extend h2; }
-  .h3 /* [5] */ { @extend h3; }
-  .h4 /* [5] */ { @extend h4; }
-  .h5 /* [5] */ { @extend h5; }
-  .h6 /* [5] */ { @extend h6; }
+  .h1 { @extend h1; }
+  .h2 { @extend h2; }
+  .h3 { @extend h3; }
+  .h4 { @extend h4; }
+  .h5 { @extend h5; }
+  .h6 { @extend h6; }
 }
