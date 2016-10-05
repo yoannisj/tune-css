@@ -1,0 +1,21 @@
+// ============================================================================
+// Tune-css Headings Util
+// ============================================================================
+
+@import "tune/helpers/setting";
+@import "tune/headings";
+
+/**
+ * ----------------------------------------------------------------------------
+ * Fluidity
+ * 1. Wrap tables or pre elements in a div with this class
+ * ----------------------------------------------------------------------------
+ * Tune.css
+ * 2. Allow developer to change the utility's classname
+ * ----------------------------------------------------------------------------
+ */
+
+.#{tune-util-classname('overflow-container')} /* [2] */
+{
+  overflow-x: scroll; /* [1] */
+}

@@ -3,6 +3,7 @@
  * ============================================================================
  */
 
+@import "tune/helpers/setting";
 @import "tune/helpers/support";
 
 /**
@@ -123,5 +124,35 @@ audio:not([controls])
 {
   [hidden] {
     @extend %tune-html5-hidden; /* [2] */
+  }
+}
+
+// Apply styles for contained objects
+// ----------------------------------
+
+@import "partials/contained-objects";
+
+@if tune-setting('contained-embeds')
+{
+  canvas,
+  video 
+  {
+    @extend %tune-contained-objects;
+  }
+}
+
+
+// Apply styles for baseline objects
+// ---------------------------------
+
+@import "tune/partials/baseline-objects";
+
+@if tune-setting('baseline-objects')
+{
+  audio,
+  canvas,
+  video
+  {
+    @extend %tune-baseline-objects;
   }
 }

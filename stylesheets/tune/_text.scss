@@ -8,6 +8,7 @@
 @import "tune/helpers/length";
 @import "tune/helpers/hook";
 @import "tune/helpers/typography";
+@import "tune/helpers/text";
 
 // @Todo: Add styles for 'selection'
 
@@ -80,14 +81,16 @@ abbr
   }
 }
 
-// see 'tune/partials/monospace' for details
-@import "tune/partials/monospace";
+// Apply styles for monospace fonts
+// --------------------------------
+
+@import "tune/partials/monospace-font";
 
 code,
 kbd,
 samp
 {
-  @extend %tune-monospace;
+  @extend %tune-monospace-font;
 }
 
 @if tune-supports('android' 4)
@@ -169,24 +172,29 @@ samp
 }
 
 @if tune-supports('ie' 9)
-  or  tune-has-hook('mark')
+  or tune-setting('mark-color')
+  or tune-setting('mark-background')
+  or tune-setting('mark-text-shadow')
+  or tune-has-hook('mark')
 {
   /**
    * ----------------------------------------------------------------------------
    * Normalize.css
    * 1. Add the correct background and color in IE <10.
    * ----------------------------------------------------------------------------
-   * 2. Allow developer to customize default 'mark' background and color
+   * 2. Improve readability by disabling text-shadow by default
+   * 3. Allow developer to customize 'mark' color, background and text-shadow
    */
 
   mark {
     @if tune-supports('ie' 9) {
-      background: tune-setting('mark-background'); /* [1, 2] */
-      color: tune-setting('mark-color'); /* [1, 2] */
+      background: tune-setting('mark-background'); /* [1, 3] */
+      color: tune-setting('mark-color'); /* [1, 3] */
+      text-shadow: tune-setting('mark-text-shadow'); /* [2, 3] */
     }
 
     @if tune-has-hook('mark') {
-      @include tun-mark;
+      @include tune-mark;
     }
   }
 }
@@ -205,7 +213,7 @@ small {
   font-size: tune-length(tune-setting('small-font-size'), '%'); /* [1, 2] */
 }
 
-@if tune-setting('small-classname')
+@if tune-setting('small-util')
 {
   .small {
     @extend small;
@@ -249,4 +257,22 @@ sub {
 
 sup {
   top: -0.5em; /* [1] */
+}
+
+@if tune-setting('selection-color')
+  or tune-setting('selection-background')
+  or tune-setting('selection-text-shadow')
+{
+  /**
+   * ----------------------------------------------------------------------------
+   * H5bp
+   * 1. Remove 'text-shadow' on selection by default
+   * ----------------------------------------------------------------------------
+   * Tune.css
+   * 2. Allow developer to customize default 'color', 'background' on selection
+   * 3. Allow developer to customize default 'text-shadow' on selection
+   */
+
+  ::-moz-selection { @include tune-selection; }
+  ::selection { @include tune-selection; }
 }

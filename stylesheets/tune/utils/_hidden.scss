@@ -1,0 +1,21 @@
+// ============================================================================
+// Tune-css Invisible Util
+// ============================================================================
+
+@import "tune/helpers/util";
+
+/**
+ * ----------------------------------------------------------------------------
+ * H5bp
+ * 1. Hide visually and from screen readers (uses '!important' because modules
+ *    with bigger specificity might very probably already set 'display')
+ * ----------------------------------------------------------------------------
+ * Tune.css
+ * 2. Allow developer to change the utility's classname
+ * ----------------------------------------------------------------------------
+ */
+
+ .#{tune-util-classname('hidden')} /* [2] */
+{
+  display: none !important; /* [1] */
+}

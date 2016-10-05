@@ -244,9 +244,11 @@
   }
 }
 
-// see 'tune/partials/monospace' for details
-@import "tune/partials/monospace";
+// Apply styles for monospace fonts
+// --------------------------------
+
+@import "tune/partials/monospace-font";
 
 pre {
-  @extend %tune-monospace;
+  @extend %tune-monospace-font;
 }

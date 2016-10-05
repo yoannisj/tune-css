@@ -1,0 +1,21 @@
+// ============================================================================
+// Tune-css Contained Object Partial
+// ============================================================================
+
+@if tune-setting('baseline-objects')
+{
+  /*
+   * ----------------------------------------------------------------------------
+   * H5bp
+   * 1. Remove the gap between audio, canvas, iframes, images, videos and the
+   *    bottom of their containers:
+   *    @link https://github.com/h5bp/html5-boilerplate/issues/440
+   * ----------------------------------------------------------------------------
+   */
+
+
+  %tune-baseline-object
+  {
+    vertical-align: middle;
+  }
+}

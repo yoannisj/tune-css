@@ -4,7 +4,7 @@
 
 // Common Settings
 // ----------------------------------------------------------------------------
-// usually also found in other Sass libraries
+// Global settings, usually also found in other Sass libraries
 
 // Font-family to set on the 'body' element.
 // @note Opinionated.
@@ -43,10 +43,13 @@ $base-color: $text-color !default;
 
 // Tune-css Settings
 // ----------------------------------------------------------------------------
-// Specific to Tune.css
+// Settings specific to Tune.css and/or used internally
 
-// Find documnetation and default values in 'tune/helpers/length'.
+// Find documentation and default values in 'tune/helpers/length'.
 $tune-units: () !default;
 
-// Find documentationa nd default values in 'tune/helpers/settings'.
+// Find documentation and default values in 'tune/helpers/settings'.
 $tune-settings: () !default;
+
+// Find documentation and default values in 'tune/helpers/util'.
+$tune-util-classnames: () !default;

@@ -223,20 +223,82 @@ $_tune-defaults: (
   // @default #000
   'mark-color': #000,
 
+  // Customize the text-shadow applied to 'mark' elements.
+  // @note Used to improve readability by disablin text shadow by default.
+  // @note Opinionated.
+  // @default #000
+  'mark-text-shadow': none,
+
   // Customize the font-size applied to 'small' elements by default.
   // @note Used for normalization.
   // @default 80%
   'small-font-size': 80%,
 
-  // Output a classname to extend 'small' elements
-  // @note Opinionated
-  // @default false
-  'small-classname': false,
-
   // Customize the font-size applied to 'sub' and 'sup' elements by default.
   // @note Used for normalization.
   // @default 75%
   'sub-sup-font-size': 75%,
+
+  // Customize the color applied to selected text by default.
+  // @note Opinionated.
+  // @default null
+  'selection-color': null,
+
+  // Customize the background-color applied to selected text by default.
+  // @note Opinionated.
+  // @default null
+  'selection-background-color': null,
+
+  // Customize the color applied to selected text by default.
+  // @note Used to improve readability by disabling text-shadow on selection
+  // @note Opinionated.
+  // @default none
+  'selection-text-shadow': none,
+
+  // Select how users can resize textareas by default.
+  // @note Used to limit to vertical resizing
+  // @note Opinionated.
+  // @default vertical
+  'textarea-resize': vertical,
+
+  // Customize the margin applied to 'fieldset' by default
+  // @note Used to reset fieldset styles
+  // @note Opinionated.
+  // @default 0
+  'fieldset-margin': 0,
+
+  // Customize the padding applied to 'fieldset' by default
+  // @note Used to reset fieldset styles
+  // @note Opinionated.
+  // @default 0
+  'fieldset-padding': 0,
+
+  // Customize the border applied to 'fieldset' by default
+  // @note Used to reset fieldset styles
+  // @note Opinionated.
+  // @default 0
+  'fieldset-border': 0,
+
+  // Whether the 'clearfix' utility should contain top-margins of child
+  // elements like most clearfixing methods do.
+  // @note Utility.
+  // @default true
+  'clearfix-contain-margins': true,
+
+  // Aspect ratio utility modifiers to create. Each entry maps a class
+  // modifier to the object's width and height
+  // @note Utility.
+  // @default '16by9', '4by3' and 'square'
+  'aspect-ratios': (
+    '16by9': 16 9,
+    '4by3': 4 3,
+    'square': 1 1
+  ),
+
+  // Default 'z-index' to apply to aspect ratio object.
+  // @note Utility.
+  // @default 100
+  'aspect-ratio-z-index': 100
 );
 
 // Inject defaults into settings defined by the developer
@@ -256,7 +318,7 @@ $tune-settings: map-merge($_tune-defaults, $tune-settings);
   @return $default;
 }
 
-// Normalize settings
+// Legacy settings
 // ============================================================================
 
 $_tune-legacy-defaults: (

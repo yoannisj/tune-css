@@ -153,22 +153,3 @@
   font-face: tune-monospace-family($family);
 }
 
-/// tune-text-decoration( $decoration )
-/// ---------------------------------------------------------------------------
-/// Includes text-decoration. Includes 'text-decoration-line' fallback for
-/// browsers not supporting the 'text-decoration' shorthand.
-/// @link http://caniuse.com/#feat=text-decoration
-
-@mixin tune-text-decoration( $decoration ) 
-{
-  // if using shorthand for browsers not supporting it
-  @if tune-supports('chrome', 'edge', 'ie', 'opera', 'safari', 'firefox' 5, 'safari' 6)
-    and length($decoration) >= 2
-  {
-    // Include first 'text-decoration-line' value as fallback
-    text-decoration: nth($decoration, 1);
-  }
-
-  text-decoration: $decoration;
-}
-

@@ -1,0 +1,27 @@
+// ============================================================================
+// Tune-css Util Helpers
+// ============================================================================
+
+@import "tune/settings";
+
+// Default classnames used for utilities
+$_tune-util-defaults: (
+  'hidden': 'hidden',
+  'invisible': 'invisible',
+  'visuallyhidden': 'visuallyhidden',
+  'focusable': 'focusable',
+  'overflow-container': 'overflow-container',
+  'aspect-ratio': 'aspect-ratio',
+  'clearfix': 'clearfix',
+);
+
+// Inject default classnames
+$tune-util-classnames: map-merge($_tune-util-defaults, $tune-util-classnames);
+
+/// tune-util-class($name)
+/// ---------------------------------------------------------------------------
+/// Returns the classname to use for a given utility, as set by the developer.
+
+@function tune-util-classname($name) {
+  @return map-get($tune-util-classnames, $name);
+}
