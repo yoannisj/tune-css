@@ -1,5 +1,5 @@
 // ============================================================================
-// Tune-css Monospace Partial
+// Tune-css MonospaceFont Partial
 // ============================================================================
 
 /**
@@ -19,7 +19,7 @@
 @import "tune/helpers/length";
 @import "tune/helpers/typography";
 
-%tune-monospace
+%tune-monospace-font
 {
   $monospace-family: tune-setting('monospace-font-family', monospace);
   $monospace-font-size: tune-setting('monospace-font-size');

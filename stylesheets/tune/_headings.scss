@@ -119,6 +119,9 @@
   }
 }
 
+// Create classnames for heading styles
+// ------------------------------------
+
 @if tune-setting('heading-classnames')
 {
   .h1 { @extend h1; }

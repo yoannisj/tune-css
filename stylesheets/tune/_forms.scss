@@ -2,3 +2,71 @@
  * = Tune-css Forms
  * ============================================================================
  */
+
+@import "aleksi/sides/output-sides";
+@import "tune/helpers/setting";
+@import "tune/helpers/hook";
+
+// Apply styles for contained objects
+// ----------------------------------
+
+@import "tune/partials/contained-objects";
+
+@if tune-setting('contained-forms')
+{
+  select,
+  textarea {
+    @extend %tune-contained-objects;
+  }
+}
+
+@if tune-setting('textarea-resize')
+  or tune-has-hook('textarea')
+{
+  /**
+   * ----------------------------------------------------------------------------
+   * H5bp
+   * 1. Allow only vertical resizing of textareas.
+   * ----------------------------------------------------------------------------
+   * Tune.css
+   * 2. Allow developer to customize 'textarea' default resizing
+   * 3. Allow developer to further customize default 'textarea' styles
+   * ----------------------------------------------------------------------------
+   */
+
+  textarea {
+    resize: tune-setting('textarea-resize'); /* [1, 2] */
+
+    @if tune-has-hook('textarea') {
+      @include tune-textarea; /* [3] */
+    }
+  }
+
+}
+
+@if tune-setting('fieldset-margin')
+  or tune-setting('fieldset-padding')
+  or tune-setting('fieldset-border')
+  or tune-has-hook('fieldset')
+{
+  /**
+   * ----------------------------------------------------------------------------
+   * H5bp
+   * 1. Remove default fieldset styles.
+   * ----------------------------------------------------------------------------
+   * Tune.css
+   * 2. Allow developer to customize fieldset 'margin', 'border', 'padding'
+   * 3. Allow developer to further customize default 'fieldset' styles
+   */
+
+  fieldset
+  {
+    margin: tune-setting('fieldset-padding');  /* [1, 2] */
+    padding: tune-setting('fieldset-border'); /* [1, 2] */
+    @include output-sides('border', tune-setting('fieldset-margin')); /* [1, 2] */
+
+    @if tune-has-hook('fieldset') {
+      @include tune-fieldset; /* [3] */
+    }
+  }
+}

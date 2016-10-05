@@ -3,6 +3,7 @@
  * ============================================================================
  */
 
+@import "tune/helpers/setting";
 @import "tune/helpers/support";
 
 @if tune-supports('ie' 10)
@@ -36,3 +37,34 @@
     overflow: hidden; /* [1] */
   }
 }
+
+// Apply styles for contained objects
+// ----------------------------------
+
+@import "partials/contained-objects";
+
+@if tune-setting('contained-embeds')
+{
+  img,
+  iframe, 
+  svg
+  { 
+    @extend %tune-contained-objects;
+  }
+}
+
+// Apply styles for baseline objects
+// ---------------------------------
+
+@import "tune/partials/baseline-objects";
+
+@if tune-setting('baseline-objects')
+{
+  iframe,
+  img,
+  svg
+  {
+    @extend %tune-baseline-object;
+  }
+}
+

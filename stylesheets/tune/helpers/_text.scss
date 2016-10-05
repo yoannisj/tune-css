@@ -1,0 +1,32 @@
+// ============================================================================
+// Tune-css Typography Helpers
+// ============================================================================
+
+/// tune-text-selection
+/// ---------------------------------------------------------------------------
+/// Default styles or selected text
+
+@mixin tune-selection {
+  color: tune-setting('selection-color'); /* [2] */
+  background: tune-setting('selection-background-color'); /* [2] */
+  text-shadow: tune-setting('selection-text-shadow'); /* [1, 3] */
+}
+
+/// tune-text-decoration( $decoration )
+/// ---------------------------------------------------------------------------
+/// Includes text-decoration. Includes 'text-decoration-line' fallback for
+/// browsers not supporting the 'text-decoration' shorthand.
+/// @link http://caniuse.com/#feat=text-decoration
+
+@mixin tune-text-decoration( $decoration ) 
+{
+  // if using shorthand for browsers not supporting it
+  @if tune-supports('chrome', 'edge', 'ie', 'opera', 'safari', 'firefox' 5, 'safari' 6)
+    and length($decoration) >= 2
+  {
+    // Include first 'text-decoration-line' value as fallback
+    text-decoration: nth($decoration, 1);
+  }
+
+  text-decoration: $decoration;
+}
