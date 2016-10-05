@@ -44,6 +44,80 @@ $tune-settings: (
   // @default none
   'text-inflation': none,
 
+  // Whether to set bottom margin only and remove top margin
+  // @link http://csswizardry.com/2012/06/single-direction-margin-declarations/
+  // @default false
+  'single-direction-margins': false,
+
+  // Whether to set vertical rhythm once for all block-level grouping elments
+  // @link http://csswizardry.com/2012/06/single-direction-margin-declarations/
+  // @default false
+  'vertical-rythm': false,
+
+  // Which value to use for vertical rhythm margins
+  // @default $base-line-height
+  'vertical-rhythm-margin': $base-line-height,
+
+  // Customize the font-family applied to 'h1-h6' elements by default.
+  // @default null
+  'heading-font-family': null,
+
+  // Customize the font-weight applied to 'h1-h6' elements by default.
+  // @default null
+  'heading-font-weight': null,
+  
+  // Customize the font-weight applied to 'h1-h6' elements by default.
+  // @default optimizeLegibility
+  'heading-text-rendering': optimizeLegibility,
+
+  // Whether to include font-size, line-height and margin styles for headings
+  // @default true
+  'typeset-headings': false,
+
+  // Customize font-size, line-height and margin for 'h1' element
+  // @default 2em null (21.440px null)
+  'h1-font-size': 2 * $base-font-size,
+  'h1-line-height': null,
+  'h1-margin': 21.440px null,
+
+  // Customize font-size, line-height and margin for 'h2' element
+  // @default 1.5em null (19.920px null)
+  'h2-font-size': 1.5 * $base-font-size,
+  'h2-line-height': null,
+  'h2-margin': 19.920px null,
+
+  // Customize font-size, line-height and margin for 'h3' element
+  // @default 1.17em null (18.720px null)
+  'h3-font-size': 1.17 * $base-font-size,
+  'h3-line-height': null,
+  'h3-margin': 18.720px null,
+
+  // Customize font-size, line-height and margin for 'h4' element
+  // Used for normalization in IE < 8
+  // @default 1em null (21.280px null )
+  'h4-font-size': 1 * $base-font-size,
+  'h4-line-height': null,
+  'h4-margin': 21.280px null,
+
+  // Customize font-size, line-height and margin for 'h5' element
+  // Used for normalization in IE < 8
+  // @default 0.83em null (22.178px null)
+  'h5-font-size': 0.83 * $base-font-size,
+  'h5-line-height': null,
+  'h5-margin': 22.178px null,
+
+  // Customize font-size, line-height and margin for 'h6' element
+  // Used for normalization in IE < 8
+  // @default 0.83em null (24.978px null)
+  'h6-font-size': 0.67 * $base-font-size,
+  'h6-line-height': null,
+  'h6-margin': 24.978px null,
+
+  // Whether to output '.h1-6' classnames to alias heading styles and
+  // decouple them from the html's 'h*' hierarchy
+  // @default true
+  'heading-classnames': true,
+
   // Customize background of active links. Used to remove background on focused
   // links in IE 10.
   // @default transparent
@@ -84,12 +158,21 @@ $tune-settings: (
   // @default italic
   'dfn-font-style': italic,
 
+  // Customize the glyph inserted before 'q' elements. Used for normalization.
+  // @default none
+  'q-glyph-before': '',
+
+  // Customize the glyph inserted after 'q' elements. Used for normalization.
+  // @default none
+  'q-glyph-after': '',
+
   // Customize the background applied to 'mark' elements. Used for
   // normalization.
   // @default #ff0
   'mark-background': #ff0,
 
   // Customize the color applied to 'mark' elements. Used for normalization.
+  // Used for normalization
   // @default #000
   'mark-color': #000,
 
@@ -103,76 +186,25 @@ $tune-settings: (
   // @default 75%
   'sub-sup-font-size': 75%,
 
-  // Whether to remove 'top' margins and set 'bottom' margins only on
-  // headings and block-level grouping elements.
-  // @link http://csswizardry.com/2012/06/single-direction-margin-declarations/
-  // @default true
-  'single-direction-margins': true,
-
-  // Whether to use vertical rhythm for margins on heading and block-level
-  // grouping elements
-  // @default true
-  'vertical-rhythm': true,
-
-  // What value to use for vertical rhythm margins on heading and block-level
-  // grouping elements
-  // @default $base-line-height
-  "vertical-rhtyhm-margin": $base-line-height,
-
-  // Customize the font-family applied to 'h1-h6' elements by default.
+  // Customize the margin applied to 'dd' elements by default. Used for
+  // normalization
   // @default null
-  'heading-font-family': null,
+  // @default [<ie 8] 0 0 0 40px
+  'dd-margin': null,
 
-  // Customize the font-weight applied to 'h1-h6' elements by default.
+  // Customize the margin applied to 'figure' elements by default. Used for
+  // normalization
+  // @default 0
+  // @default [ie < 8] 1em 40px
+  'figure-margin': 0,
+
+  // Customize the border-style used to render 'hr' elements.
   // @default null
-  'heading-font-weight': null,
-  
-  // Customize the font-weight applied to 'h1-h6' elements by default.
-  // @default optimizeLegibility
-  'heading-text-rendering': optimizeLegibility,
+  'hr-style': null,
 
-  // Whether to include font-size, line-height and margin styles for headings
-  // @default true
-  'typeset-headings': false,
-
-  // Customize font-size, line-height and margin for 'h1' element
-  // @default 2em null 0.67em
-  'h1-font-size': 2 * $base-font-size,
-  'h1-line-height': null,
-  'h1-vertical-margin': 21.440px,
-
-  // Customize font-size, line-height and margin for 'h2' element
-  // @default 1.5em null 0.83em
-  'h2-font-size': 1.5 * $base-font-size,
-  'h2-line-height': null,
-  'h2-vertical-margin': 19.920px,
-
-  // Customize font-size, line-height and margin for 'h3' element
-  // @default 1.17em null 1em
-  'h3-font-size': 1.17 * $base-font-size,
-  'h3-line-height': null,
-  'h3-vertical-margin': 18.720px,
-
-  // Customize font-size, line-height and margin for 'h4' element
-  // @default 1em null 1.33em
-  'h4-font-size': 1 * $base-font-size,
-  'h4-line-height': null,
-  'h4-vertical-margin': 21.280px,
-
-  // Customize font-size, line-height and margin for 'h5' element
-  // @default 0.83em null 1.67em
-  'h5-font-size': 0.83 * $base-font-size,
-  'h5-line-height': null,
-  'h5-vertical-margin': 22.178px,
-
-  // Customize font-size, line-height and margin for 'h6' element
-  // @default 0.83em null 1.67em
-  'h6-font-size': 0.67 * $base-font-size,
-  'h6-line-height': null,
-  'h6-vertical-margin': 24.978px,
-
-  // Whether to output '.h1-6' classnames to alias heading styles and
-  // decouple them from the html's 'h*' hierarchy
-  // @default true
-  'heading-classnames': true,
+  // Customize the margin applied to 'p' and 'pre' elements by default.
+  // Used for normalization in IE < 8.
+  // @default null
+  // @default [<ie 8] $base-font-size 0
+  'parapgraph-margin': null,
 );

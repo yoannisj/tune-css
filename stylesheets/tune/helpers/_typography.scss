@@ -2,25 +2,82 @@
 // Tune-css Typography Helpers
 // ============================================================================
 
+@import "aleksi/lists/walk";
 @import "aleksi/sides/side-value";
+@import "aleksi/sides/sides-shorthand";
+@import "aleksi/sides/output-sides";
+@import "tune/helpers/setting";
 @import "tune/helpers/length";
+@import "tune/partials/vertical-rhythm";
 
-/// tune-vertical-margin( $margins )
+/// tune-margin( $margin[, $unit, $args... ])
 /// ---------------------------------------------------------------------------
 
-@mixin tune-vertical-margin( $margin, $unit, $args...)
+@mixin tune-margin($margin, $unit: 'rem', $args...)
 {
-  @if not tune-setting('single-direction-margins') {
-    $top: side-value($margin, 'top');
-    @include tune-length('margin-top', $top, $unit, $args...);
+  // convert margin lengths to correct unit
+  $lengths: ();
+  @each $side in const('CSS_LAYOUT_SIDES') {
+    $m: side-value($margin, $side);
+    $u: side-value($unit, $side);
+    $lengths: append($lengths, tune-length($m, $u, $args...));
   }
 
-  @else {
+  // use default vertical-rhyhtm-margin for vertical margins when applies
+  @if tune-setting('vertical-rhythm') {
+    @extend %tune-vertical-rhythm;
+
+    // output 'margin-left' and 'margin-right' in correct unit
+    margin-right: nth($lengths, 2);
+    margin-left: nth($lengths, 4);
+  }
+
+  @else
+  {
+    // set 'top' length to 0 if using single-direction-margins
+    @if tune-setting('single-direction-margins') {
+      $lengths: set-nth(margin-shorthand($lengths), 1, 0);
+    }
+
+    // output margins in shortest form as possible
+    @include output-sides('margin', $lengths);
+  }
+}
+
+/// tune-vertical-rhythm( $margin[, $unit, $args... ])
+/// ---------------------------------------------------------------------------
+
+@mixin tune-vertical-rhythm($margin, $unit: 'rem', $args...)
+{
+  @if tune-setting('vertical-rhythm') {
+    @extend %tune-vertical-rhythm;
+  }
+
+  @else
+  {
+    // allow passing the name of a setting to specify the margin value
+    @if type-of($margin) == 'string' {
+      $margin: tune-setting($margin);
+    }
+
+    // output 'top' and 'bottom' values
+    @include tune-vertical-margin($margin, $unit, $args...);
+  }
+}
+
+/// tune-vertical-margin( $margin[, $unit, $args... ])
+/// ---------------------------------------------------------------------------
+
+@mixin tune-vertical-margin( $margin, $unit: 'rem', $args... )
+{
+  // set top value to '0' if using single direction margins
+  @if tune-setting('single-direction-margins') {
     margin-top: 0;
+  } @else {
+    margin-top: tune-length(side-value($margin, 'top'), $unit, $args...);
   }
 
-  $bottom: side-value($margin, 'bottom');
-  @include tune-length('margin-bottom', $bottom, $unit, $args...);
+  margin-bottom: tune-lengh(side-value($margin, 'bottom'), $unit, $args...);
 }
 
 /// tune-typescale( $font-size, $line-height, $args... )

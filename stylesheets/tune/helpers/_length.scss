@@ -12,6 +12,11 @@
 
 @function tune-length($val, $unit, $args...)
 {
+  // accept 'null', in which case no length conversion will be made
+  @if $val == null {
+    @return null;
+  }
+
   // use developer defined function to convert length
   $fn:_tune-unit-fn($unit);
   // $args: prepend($args, $val);
@@ -25,16 +30,12 @@
 
 @mixin tune-length($property, $val, $unit, $args...)
 {
-  // accept 'null', in which case no length conversion will be made
-  @if $val != null
-  {
-    // include 'rem' fallbacks for IE8 and smaller
-    @if $unit == 'rem' and tune-supports('ie' 8) {
-      #{$property}: tune-length($val, 'px', $args...);
-    }
-
-    #{$property}: tune-length($val, $unit, $args...);
+  // include 'rem' fallbacks for IE8 and smaller
+  @if $unit == 'rem' and tune-supports('ie' 8) {
+    #{$property}: tune-length($val, 'px', $args...);
   }
+
+  #{$property}: tune-length($val, $unit, $args...);
 }
 
 /// _tune-unit-fn($val, $unit[, $args... ])
