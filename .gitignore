@@ -1,3 +1,9 @@
+# Compiled files
+dist/css/*
+
+# Play around during development
+stylesheets/_play.scss
+
 # Project Dependencies
 node_modules
 bower_components
@@ -6,10 +12,6 @@ bower_components
 .DS_Store
 ._*
 Thumbs.db
-
-# Play around during development
-play.js
-stylesheets/_play.scss
 
 # Exclude IDE management files.
 # Eclipse
