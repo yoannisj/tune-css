@@ -42,7 +42,6 @@
   or tune-supports('chrome', 'firefox', 'safari')
   or tune-supports('ie' 7)
 {
-
 /**
  * ----------------------------------------------------------------------------
  * Normalize.css
@@ -59,38 +58,64 @@
 
   h1 /* [5] */
   {
-    $h1-font-size: tune-setting('h1-font-size');
-    $h1-line-height: tune-setting('h1-line-height');
-    @include tune-typescale($h1-font-size, $h1-line-height); /* [1, 2, 3] */
-
-    @if tune-setting('vertical-margin') or tune-setting('h1-margin') {
-      @include tune-margin(tune-setting('h1-margin'));
+    @if tune-setting('h1-font-size')
+      or tune-setting('h1-line-height')
+    {
+      $h1-font-size: tune-setting('h1-font-size');
+      $h1-line-height: tune-setting('h1-line-height');
+      @include tune-typescale($h1-font-size, $h1-line-height); /* [1, 2, 3] */
     }
 
-    @else if tune-supports('ie' 7) {
-     @include tune-margin(tune-setting('h1-margin'), 'em');
+    @if tune-setting('vertical-rhythm')
+      or tune-setting('h1-margin')
+    {
+      @include tune-vertical-rhythm(tune-setting('h1-margin')); /* [1, 2, 4] */
     }
   }
 }
 
-@if tune-setting('typeset-headings') or tune-supports('ie' 7)
+@if tune-setting('h2-font-size')
+  or tune-setting('h2-line-height')
+  or tune-setting('h2-margin')
 {
-  @for $i from 2 through 6
-  {
-    h#{$i} /* [5] */
-    {
-      $font-size: tune-setting('h#{$i}-font-size');
-      $line-height: tune-setting('h#{$i}-line-height');
-      @include tune-typescale($font-size, $line-height); /* [2, 3] */
+  h2 {
+    @include tune-heading-level(2);
+  }
+}
 
-      @if tune-setting('vertical-margin') or tune-setting('h#{$i}-margin') {
-        @include tune-margin(tune-setting('h#{$i}-margin')); /* [4] */
-      }
+@if tune-setting('h3-font-size')
+  or tune-setting('h3-line-height')
+  or tune-setting('h3-margin')
+{
+  h3 {
+    @include tune-heading-level(3);
+  }
+}
 
-      @else if tune-supports('ie' 7) {
-        @include tune-margin(tune-setting('h#{$i}-margin'), 'em'); /* [4] */
-      }
-    }
+@if tune-setting('h4-font-size')
+  or tune-setting('h4-line-height')
+  or tune-setting('h4-margin')
+{
+  h4 {
+    @include tune-heading-level(4);
+  }
+}
+
+@if tune-setting('h5-font-size')
+  or tune-setting('h5-line-height')
+  or tune-setting('h5-margin')
+{
+  h5 {
+    @include tune-heading-level(5);
+  }
+}
+
+@if tune-setting('h6-font-size')
+  or tune-setting('h6-line-height')
+  or tune-setting('h6-margin')
+{
+  h6 {
+    @include tune-heading-level(6);
   }
 }
 

@@ -3,16 +3,14 @@
  * ============================================================================
  */
 
+@import "aleksi/sides/output-sides";
 @import "tune/helpers/setting";
 @import "tune/helpers/hook";
 @import "tune/helpers/support";
 @import "tune/helpers/typography";
 
-@import "tune/partials/monospace";
-
-if tune-setting('vertical-rhythm')
-  or tune-setting('blockquote-vertical-margin')
-  or tune-setting('blockquote-indentation')
+@if tune-setting('vertical-rhythm')
+  or tune-setting('blockquote-margin')
   or tune-has-hook('blockquote')
   or tune-supports('ie' 7)
 {
@@ -30,15 +28,17 @@ if tune-setting('vertical-rhythm')
 
   blockquote
   {
-    @if tune-setting('vertical-rhythm') or tune-setting('blockquote-margin') {
-      @include tune-margin(tune-setting('blockquote-margin')); /* [1, 2] */
+    @if tune-setting('vertical-rhythm')
+      or tune-setting('blockquote-margin')
+    {
+      @include tune-vertical-rhythm(tune-setting('blockquote-margin')); /* [1, 2] */
     }
 
     @else if tune-supports('ie' 7) {
-      margin: 1em 40px; /* [1, 2] */
+      margin: _tune-legacy-setting('blockquote-margin'); /* [1, 2] */
     }
 
-    @if tune-has-hook('hr') {
+    @if tune-has-hook('blockquote') {
       @include tune-blockquote;
     }
   }
@@ -68,11 +68,11 @@ if tune-setting('vertical-rhythm')
     @if tune-setting('vertical-rhythm')
       or tune-setting('list-margin')
     {
-      @include tune-margin(tune-setting('list-margin')); /* [1, 2] */
+      @include tune-vertical-rhythm(tune-setting('list-margin')); /* [1, 2] */
     }
 
     @else if tune-supports('ie' 7) {
-      @include tune-margin($base-font-size 0, 'em' 'px'); /* [1, 2] */
+      @include  _tune-legacy-setting('list-margin'); /* [1, 2] */
     }
 
     @if tune-has-hook('list') {
@@ -122,7 +122,9 @@ if tune-setting('vertical-rhythm')
     @if tune-setting('dd-margin')
       or tune-supports('ie' 7)
     {
-      @include tune-margin(tune-setting('dd-margin', 0 0 0 40px)); /* [1, 2] */
+      // use 'output-sides' as 'single-direction-margins' setting should not
+      // interfere when developers want to add space between 'dt' and 'dd'.
+      @include sides('margin', tune-setting('dd-margin', 0 0 0 40px)); /* [1, 2] */
     }
 
     @if tune-has-hook('dd') {
@@ -142,24 +144,18 @@ if tune-setting('vertical-rhythm')
    * 1. Address margin not present in IE 6/7/8/9, Safari 5, and Opera 11.
    * ----------------------------------------------------------------------------
    * Tune.css
-   * 2. Allow developers to customize 'figure' default margin
-   * 3. Allow developers to further customize default 'figure' styles
+   * 2. Set missing margin to value in modern browsers instead of removing it
+   * 3. Allow developers to customize 'figure' default margin
+   * 4. Allow developers to further customize default 'figure' styles
    */
 
   figure
   {
     @if tune-setting('vertical-rhythm')
       or tune-setting('figure-margin')
+      or tune-supports('ie' 8, 'safari' 5, 'opera' 11)
     {
-      @include tune-margin(tune-setting('figure-margin')); /* [1, 2] */
-    }
-
-    @else if tune-supports('ie' 8) {
-      margin: 0; /* [1] */
-    }
-
-    @else if tune-supports('ie' 9, 'safari' 5, 'opera' 11) {
-      margin: 1em 40px; /* [1] */
+      @include tune-vertical-rhythm(tune-setting('figure-margin')); /* [1, 2, 3] */
     }
 
     @if tune-has-hook('figure') {
@@ -180,25 +176,33 @@ if tune-setting('vertical-rhythm')
    * 2. Show the overflow in Edge and IE.
    * ----------------------------------------------------------------------------
    * Tune.css
-   * 3. Allow developers to customize 'hr' default color
-   * 3. Allow developers to further customize default 'hr' styles
+   * 3. Allow developers to customize 'hr' margin, and apply vertical-rhtythm
+   * 4. Allow developers to customize 'hr' default color
+   * 5. Allow developers to further customize default 'hr' styles
    */
 
 // @Todo: check if outputting only 'border-top' removes double borders in all
 // browsers, or if some browsers need an additional 'border-bottom: 0'
 
-  hr {
+  hr
+  {
     box-sizing: content-box; /* [1] */
     height: 0; /* [1] */
     overflow: visible; /* [2] */
 
+    @if tune-setting('vertical-rhythm')
+      or tune-setting('hr-margin')
+    {
+      @include tune-vertical-rhythm(tune-setting('hr-margin')); /* [3] */
+    }
+
     @if setting('hr-border') {
-      border-top: tune-setting('hr-border');
+      border-top: tune-setting('hr-border'); /* [4] */
       // border-bottom: 0;
     }
 
     @if tune-has-hook('hr') {
-      @include tune-hr;
+      @include tune-hr; /* [5] */
     }
   }
 }
@@ -224,11 +228,11 @@ if tune-setting('vertical-rhythm')
     @if tune-setting('vertical-rhythm')
       or tune-setting('paragraph-margin')
     {
-      @include tune-margin(tune-setting('paragraph-margin'));
+      @include tune-vertical-rhythm(tune-setting('paragraph-margin'));
     }
 
     @else {
-      margin: 1em 0;
+      margin: _tune-legacy-setting('paragraph-margin');
     }
   }
 
@@ -239,6 +243,9 @@ if tune-setting('vertical-rhythm')
     }
   }
 }
+
+// see 'tune/partials/monospace' for details
+@import "tune/partials/monospace";
 
 pre {
   @extend %tune-monospace;

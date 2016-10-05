@@ -6,205 +6,47 @@
 // ----------------------------------------------------------------------------
 // usually also found in other Sass libraries
 
-// Normalize default font-family across browsers
-$base-font-family: 'sans-serif' !default;
+// Font-family to set on the 'body' element.
+// @note Opinionated.
+// @default $base-font-family
+$base-font-family: 'Helvetica Neue', Helvetica, Arial, 'sans-serif' !default;
 
-// Font-size to set on the 'body' element
-// - used to calculate 'em' values
+// Font-size to set on the 'body' element.
+// @note used to calculate 'em' values 
+// @note Used to allow users to zoom font-size in IE < 7.
+// @note Opinionated in other browsers.
 $base-font-size: 16px !default;
 
-// Font-size to set on the 'html' element
-// - used to calculate 'rem' values
+// Font-size to set on the 'html' element.
+// @note used to calculate 'rem' values
+// @note Used to allow global magnification when using relative units.
+// @default $root-font-size
 $root-font-size: $base-font-size !default;
 
-// Line-height to set on the 'body' element
+// Line-height to set on the 'body' element.
+// @note Opinionated.
+// @default $base-background-color
 $base-line-height: 24px !default;
 
-// Background-color to set on the 'html' element
-// - override user default background color
-$base-background-color: #fff !default;
+// Background to set on the 'html' element.
+// @note Used to override OS scheme's background and guarantee readability.
+// @default $base-background
+$body-background: #fff !default;
+$base-background: $body-background !default;
 
-// Color to set on the 'html' element
-// - override user default text color
-$base-text-color: #000 !default;
+// Color set on the 'hmtl' element.
+// @note Used to override OS scheme's background and guarantee readability.
+// @default $base-text-color
+$body-color: #000 !default;
+$text-color: $body-color !default;
+$base-color: $text-color !default;
 
 // Tune-css Settings
 // ----------------------------------------------------------------------------
 // Specific to Tune.css
 
-$tune-unit-functions: () !default;
+// Find documnetation and default values in 'tune/helpers/length'.
+$tune-units: () !default;
 
-$tune-settings: (
-  // Customize how mobile browsers adjust text size. Used to disable text size
-  // adjustments on orientation change.
-  // @link https://developer.mozilla.org/en-US/docs/Web/CSS/text-size-adjust
-  // - 'auto' or 'null' for default behaviour
-  // - '<percentage>' to set custom inflation amount
-  // - 'none' to disable inflation (tune-css will fix webkit bug)
-  // @default none
-  'text-inflation': none,
-
-  // Whether to set bottom margin only and remove top margin
-  // @link http://csswizardry.com/2012/06/single-direction-margin-declarations/
-  // @default false
-  'single-direction-margins': false,
-
-  // Whether to set vertical rhythm once for all block-level grouping elments
-  // @link http://csswizardry.com/2012/06/single-direction-margin-declarations/
-  // @default false
-  'vertical-rythm': false,
-
-  // Which value to use for vertical rhythm margins
-  // @default $base-line-height
-  'vertical-rhythm-margin': $base-line-height,
-
-  // Customize the font-family applied to 'h1-h6' elements by default.
-  // @default null
-  'heading-font-family': null,
-
-  // Customize the font-weight applied to 'h1-h6' elements by default.
-  // @default null
-  'heading-font-weight': null,
-  
-  // Customize the font-weight applied to 'h1-h6' elements by default.
-  // @default optimizeLegibility
-  'heading-text-rendering': optimizeLegibility,
-
-  // Whether to include font-size, line-height and margin styles for headings
-  // @default true
-  'typeset-headings': false,
-
-  // Customize font-size, line-height and margin for 'h1' element
-  // @default 2em null (21.440px null)
-  'h1-font-size': 2 * $base-font-size,
-  'h1-line-height': null,
-  'h1-margin': 21.440px null,
-
-  // Customize font-size, line-height and margin for 'h2' element
-  // @default 1.5em null (19.920px null)
-  'h2-font-size': 1.5 * $base-font-size,
-  'h2-line-height': null,
-  'h2-margin': 19.920px null,
-
-  // Customize font-size, line-height and margin for 'h3' element
-  // @default 1.17em null (18.720px null)
-  'h3-font-size': 1.17 * $base-font-size,
-  'h3-line-height': null,
-  'h3-margin': 18.720px null,
-
-  // Customize font-size, line-height and margin for 'h4' element
-  // Used for normalization in IE < 8
-  // @default 1em null (21.280px null )
-  'h4-font-size': 1 * $base-font-size,
-  'h4-line-height': null,
-  'h4-margin': 21.280px null,
-
-  // Customize font-size, line-height and margin for 'h5' element
-  // Used for normalization in IE < 8
-  // @default 0.83em null (22.178px null)
-  'h5-font-size': 0.83 * $base-font-size,
-  'h5-line-height': null,
-  'h5-margin': 22.178px null,
-
-  // Customize font-size, line-height and margin for 'h6' element
-  // Used for normalization in IE < 8
-  // @default 0.83em null (24.978px null)
-  'h6-font-size': 0.67 * $base-font-size,
-  'h6-line-height': null,
-  'h6-margin': 24.978px null,
-
-  // Whether to output '.h1-6' classnames to alias heading styles and
-  // decouple them from the html's 'h*' hierarchy
-  // @default true
-  'heading-classnames': true,
-
-  // Customize background of active links. Used to remove background on focused
-  // links in IE 10.
-  // @default transparent
-  'link-background-active': transparent,
-
-  // Customize outline applied to focused links [null].
-  // @default null
-  'link-outline-focus': null,
-
-  // Customize outline of active and hovered links. Used to remove outline on
-  // focused links when also active or hovered.
-  // @default 0
-  'link-outline-focus-active': 0,
-
-  // Customize text-decoration applied on 'abbr[title]' elements. Accepts CSS3
-  // text-decoration shorthands, but 'text-decoration-line' MUST be specified,
-  // and in first position as it will be used as fallback.
-  // Used for normalization.
-  // @default underline dotted
-  'abbr-title-text-decoration': underline dotted,
-
-  // Customize font-weight used on 'b' and 'strong' elements. Used for
-  // normalization.
-  // @default bolder
-  'strong-font-weight': bolder,
-
-  // Customize font-family used on elements defaulting to monospace font.
-  // Used to prevent browsers from resizing default monospace fonts.
-  // @default monospace
-  'monospace-font-family': monospace,
-
-  // Customize font-size used on elements defaulting to monospace font.
-  // Used to prevent browsers from resizing default monospace fonts.
-  // @default $base-font-size
-  'monospace-font-size': $base-font-size,
-
-  // Customize the font-style applied 'dfn' elements. Used for normalization.
-  // @default italic
-  'dfn-font-style': italic,
-
-  // Customize the glyph inserted before 'q' elements. Used for normalization.
-  // @default none
-  'q-glyph-before': '',
-
-  // Customize the glyph inserted after 'q' elements. Used for normalization.
-  // @default none
-  'q-glyph-after': '',
-
-  // Customize the background applied to 'mark' elements. Used for
-  // normalization.
-  // @default #ff0
-  'mark-background': #ff0,
-
-  // Customize the color applied to 'mark' elements. Used for normalization.
-  // Used for normalization
-  // @default #000
-  'mark-color': #000,
-
-  // Customize the font-size applied to 'small' elements by default. Used for
-  // normalization.
-  // @default 80%
-  'small-font-size': 80%,
-
-  // Customize the font-size applied to 'sub' and 'sup' elements by default.
-  // Used for normalization.
-  // @default 75%
-  'sub-sup-font-size': 75%,
-
-  // Customize the margin applied to 'dd' elements by default. Used for
-  // normalization
-  // @default null
-  // @default [<ie 8] 0 0 0 40px
-  'dd-margin': null,
-
-  // Customize the margin applied to 'figure' elements by default. Used for
-  // normalization
-  // @default 0
-  // @default [ie < 8] 1em 40px
-  'figure-margin': 0,
-
-  // Customize the border-style used to render 'hr' elements.
-  // @default null
-  'hr-style': null,
-
-  // Customize the margin applied to 'p' and 'pre' elements by default.
-  // Used for normalization in IE < 8.
-  // @default null
-  // @default [<ie 8] $base-font-size 0
-  'parapgraph-margin': null,
-);
+// Find documentationa nd default values in 'tune/helpers/settings'.
+$tune-settings: () !default;

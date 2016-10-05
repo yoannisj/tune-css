@@ -9,6 +9,8 @@
 @import "tune/helpers/hook";
 @import "tune/helpers/typography";
 
+// @Todo: Add styles for 'selection'
+
 /**
  * ----------------------------------------------------------------------------
  * Normalize.css
@@ -35,7 +37,7 @@ abbr
 
   &[title]
   {
-    $abbr-title-text-decoration: tune-setting('tune-abbr-title-text-decoration', underline dotted);
+    $abbr-title-text-decoration: tune-setting('abbr-title-text-decoration', underline dotted);
     @include tune-text-decoration($abbr-title-text-decoration); /* [2, 3, 4] */
 
     @if tune-has-hook('abbr') {
@@ -90,7 +92,7 @@ samp
 
 @if tune-supports('android' 4)
   or tune-setting('dfn-font-style')
-  or  tune-has-hook('dfn')
+  or tune-has-hook('dfn')
 {
   /**
    * ----------------------------------------------------------------------------
@@ -153,15 +155,15 @@ samp
     {
       quotes: none; /* [2] */
       &:before {
-        content: "#{tune-setting('q-glyph-before', «)}"; /* [2, 4, 5] */
+        content: "#{tune-setting('q-glyph-before')}"; /* [2, 4, 5] */
       }
       &:after {
-        content: "#{tune-setting('q-glyph-after', »)}"; /* [2, 4, 5] */
+        content: "#{tune-setting('q-glyph-after')}"; /* [2, 4, 5] */
       }
     }
 
     @else {
-      quotes: "#{tune-setting('q-glyph-before', «)}" "#{tune-setting('q-glyph-after', »)}"; /* [4, 5] */
+      quotes: "#{tune-setting('q-glyph-before')}" "#{tune-setting('q-glyph-after')}"; /* [4, 5] */
     }
   }
 }
@@ -179,8 +181,8 @@ samp
 
   mark {
     @if tune-supports('ie' 9) {
-      background: tune-setting('mark-background', #ff0); /* [1, 2] */
-      color: tune-setting('mark-color', #000); /* [1, 2] */
+      background: tune-setting('mark-background'); /* [1, 2] */
+      color: tune-setting('mark-color'); /* [1, 2] */
     }
 
     @if tune-has-hook('mark') {
@@ -200,8 +202,14 @@ samp
  */
 
 small {
-  $small-font-size: tune-setting('small-font-size', 80%);
-  font-size: tune-length($small-font-size, '%'); /* [1, 2] */
+  font-size: tune-length(tune-setting('small-font-size'), '%'); /* [1, 2] */
+}
+
+@if tune-setting('small-classname')
+{
+  .small {
+    @extend small;
+  }
 }
 
 /**
@@ -225,8 +233,7 @@ small {
 
 sub,
 sup {
-  $sub-sup-font-size: tune-setting('sub-sup-font-size', 75%);
-  font-size: tune-length($sub-sup-font-size, '%'); /* [1, 2] */
+  font-size: tune-length(tune-setting('sub-sup-font-size'), '%'); /* [1, 2] */
   line-height: 0; /* [1] */
   position: relative; /* [1] */
   vertical-align: baseline; /* [1] */

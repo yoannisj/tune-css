@@ -9,31 +9,32 @@
 /**
  * ----------------------------------------------------------------------------
  * Normalize.css
- * 1. Remove the gray background on active links in IE 10.
+ * 1. Remove the gray background on focused links in IE 10.
  * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
  * 3. Remove the outline on focused links when they are also active or hovered
  *    in all browsers (opinionated).
  * ----------------------------------------------------------------------------
  * Tune-css
- * 4. ALlow developer to customize outline of focused, hovered and active links
+ * 4. Allow developer to customize outline of focused, hovered and active links
  * 5. Allow developer to further customize default link styles
  */
 
-// @Todo: test if setting background color in ':focus' pseudo-class also
-// fixes background-color when link is focused in IE
+// @Todo: verify if IE 10 sets a background on ':active' of ':focus' linked??
+// @Todo: test if setting background color in ':active' pseudo-class also
+// fixes background-color when link is active in IE
 
 a
 {
   -webkit-text-decoration-skip: objects; /* [2] */
 
   &:focus {
-    background: tune-setting('link-background-focus', transparent); /* [1, 4] */
+    background: tune-setting('link-background-focus'); /* [1, 4] */
     outline: tune-setting('link-outline-focus'); /* [4] */
   }
 
   &:active,
   &:hover {
-    outline: tune-setting('link-outline-focus-active', 0); /* [3, 4] */
+    outline: tune-setting('link-outline-focus-active'); /* [3, 4] */
   }
 
   @if tune-has-hook('links') {

@@ -43,7 +43,7 @@
 /// Returns the unit conversion function, as defined by developer
 
 // Defaults injected by Tune-css
-$_tune-unit-functions: map-merge((
+$_tune-units: map-merge((
   'em': 'to-em',
   'rem': 'to-rem',
   '%': 'to-percent',
@@ -53,12 +53,12 @@ $_tune-unit-functions: map-merge((
   'cm': 'to-cm',
   'pt': 'to-pt',
   'pc': 'to-pc',
-), $tune-unit-functions);
+), $tune-units);
 
 @function _tune-unit-fn($unit)
 {
   // check if developer defined a unit conversion function
-  $fn: map-get($_tune-unit-functions, $unit);
+  $fn: map-get($_tune-units, $unit);
 
   // warn if function was not found or does not exist
   @if not $fn or not function-exists($fn) {
