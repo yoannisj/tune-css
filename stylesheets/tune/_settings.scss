@@ -30,14 +30,14 @@ $base-line-height: 24px !default;
 
 // Background to set on the 'html' element.
 // @note Used to override OS scheme's background and guarantee readability.
-// @default $base-background
+// @default $body-background or #fff
 $body-background: #fff !default;
 $base-background: $body-background !default;
 
 // Color set on the 'hmtl' element.
 // @note Used to override OS scheme's background and guarantee readability.
-// @default $base-text-color
-$body-color: #000 !default;
+// @default $text-color or $body-color or #222
+$body-color: #222 !default;
 $text-color: $body-color !default;
 $base-color: $text-color !default;
 

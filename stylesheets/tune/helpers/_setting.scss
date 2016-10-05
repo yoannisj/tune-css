@@ -161,7 +161,31 @@ $_tune-defaults: (
   // @default false
   'heading-classnames': false,
 
-  // Customize background of focused links.
+  // Customize transition between different link states.
+  // @note Opinionated.
+  // @default color 0.35s
+  'link-transition': color 0.35s,
+
+  // Customize color applied to links by default.
+  // @note Opinionated.
+  // @default #265C83
+  'link-color': #265C83,
+
+  // Customize text-decoarion applied to links by default.
+  // @note Shorthands are accepted, but 'text-decoration-line' MUST be
+  //    specified, and in first position to correctly be used as fallback.
+  // @note Used to disable 'text-decoration' on links by default
+  // @note Opinionated.
+  // @default none
+  'link-text-decoration': none,
+
+  // Customize color applied to links by default. Set to 'false' to
+  // disable change of colors on visited links.
+  // @note Opinionated.
+  // @default false
+  'link-color-visited': false,
+
+  // Customize background applied to focused links by default.
   // @note Used to remove background on focused links in IE 10.
   // @default transparent
   'link-background-focus': transparent,
@@ -170,6 +194,21 @@ $_tune-defaults: (
   // @note Opinionated.
   // @default null
   'link-outline-focus': null,
+
+  // Customize color applied to focused links.
+  // @note Opinionated.
+  // @default null
+  'link-color-focus': null,
+
+  // Customize background applied to focused links.
+  // @note Opinionated.
+  // @default #7FDBFF
+  'link-color-hover': #7FDBFF,
+
+  // Customize background applied to focused links.
+  // @note Opinionated.
+  // @default #007BE6
+  'link-color-active': #007BE6,
 
   // Customize outline of active and hovered links.
   // @note Used to remove outline on focused links when also active or hovered.

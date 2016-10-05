@@ -4,6 +4,7 @@
  */
 
 @import "tune/helpers/setting";
+@import "tune/helpers/text";
 @import "tune/helpers/hook";
 
 /**
@@ -14,9 +15,14 @@
  * 3. Remove the outline on focused links when they are also active or hovered
  *    in all browsers (opinionated).
  * ----------------------------------------------------------------------------
+ * mrmrs/Links
+ * 4. Give link's smooth transitions and better default colors
+ * 5. Don't change color of visited links
+ * ----------------------------------------------------------------------------
  * Tune-css
- * 4. Allow developer to customize outline of focused, hovered and active links
- * 5. Allow developer to further customize default link styles
+ * 6. Allow developer to customize default link styles
+ * 7. Allow developer to customize default link transitions
+ * 8. Allow developer to further customize default link styles
  */
 
 // @Todo: verify if IE 10 sets a background on ':active' of ':focus' linked??
@@ -25,19 +31,52 @@
 
 a
 {
-  -webkit-text-decoration-skip: objects; /* [2] */
+  -webkit-transition: tune-setting('link-transition'); /* [4, 7] */
+  transition: tune-setting('link-transition'); /* [4, 7] */
+  color: tune-setting('link-color'); /* [4] */
 
-  &:focus {
-    background: tune-setting('link-background-focus'); /* [1, 4] */
-    outline: tune-setting('link-outline-focus'); /* [4] */
+  $link-text-decoration: tune-setting('link-text-decoration');
+  @include tune-text-decoration($link-text-decoration); /* [6] */
+  @if $link-text-decoration != none {
+    -webkit-text-decoration-skip: objects; /* [2] */
   }
 
-  &:active,
+  &:focus {
+    color: tune-setting('link-color-focus'); /* [6] */
+    background: tune-setting('link-background-focus'); /* [1, 6] */
+    outline: tune-setting('link-outline-focus'); /* [6] */
+  }
+
+  @if tune-setting('link-color-visited') == false
+    or tune-setting('link-color-visited') == tune-setting('link-color')
+  {
+    &
+    &:link,
+    &:visited {
+      color: tune-setting('link-color'); /* [5] */
+    }
+  }
+
+  @else {
+    &:visited {
+      color: tune-setting('link-visited'); /* [6] */
+    }
+  }
+
+  &:hover,
+  &:active {
+    outline: tune-setting('link-outline-focus-active'); /* [3, 6] */
+  }
+
   &:hover {
-    outline: tune-setting('link-outline-focus-active'); /* [3, 4] */
+    color: tune-setting('link-color-hover'); /* [4, 6] */
+  }
+
+  &:active {
+    color: tune-setting('link-color-active'); /* [4, 6] */
   }
 
   @if tune-has-hook('links') {
-    @include tune-links(); /* [5] */
+    @include tune-links(); /* [7] */
   }
 }
