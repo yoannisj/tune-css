@@ -1,0 +1,361 @@
+// ============================================================================
+// Tune-css Setting Defaults
+// ============================================================================
+
+$_tune-defaults: (
+  // Whether to set vertical rhythm once for all block-level grouping elments.
+  // @link http://csswizardry.com/2012/06/single-direction-margin-declarations/
+  // @note  Opinionated.
+  // @default false
+  'vertical-rythm': false,
+
+  // Which length value to use for vertical rhythm margins.
+  // @note Opinionated.
+  // @default $base-line-height
+  'vertical-rhythm-length': $base-line-height,
+  
+  // Units to use to output margin properties. You can set up to 4 values,
+  // using same order as in the 'margin' shorthand to target a specific side.
+  // @note Top and bottom margin will use 'rem' if 'vertical-rhythm' is true.
+  // @note Dont use '%' for left/right margins, this has unpredicted results.
+  // @note Opinionated.
+  // @default 'em' 'px'
+  'margin-units': 'em' 'px',
+
+  // Whether to set bottom margin only and remove top margin.
+  // @link http://csswizardry.com/2012/06/single-direction-margin-declarations/
+  // @note Opinionated.
+  // @default false
+  'single-direction-margins': false,
+
+  // Customize how mobile browsers adjust text size.
+  // @note Used to disable text size adjustments on orientation change.
+  // @link https://developer.mozilla.org/en-US/docs/Web/CSS/text-size-adjust
+  // - 'auto' or 'null' for default behaviour
+  // - '<percentage>' to set custom inflation amount
+  // - 'none' to disable inflation (tune-css will fix webkit bug)
+  // @default none
+  'text-size-adjust': none,
+
+  // Margin to set on the 'body' element
+  // @note used to normalize 'body' margin in IE < 7
+  // @note Opinionated in other browsers
+  'body-margin': 0,
+
+  // Customize the margin applied to 'blockquote' elements by default.
+  // @note Top and bottom margins are overriden by 'vertical-rhythm-length'
+  // @note Used for normalization in IE < 8.
+  // @default null
+  // @default [IE < 8] $base-font-size 0
+  'blockquote-margin': null,
+
+  // Customize the margin applied to 'dl', 'menu', 'ol', 'ul' elements
+  // by default.
+  // @note Top and bottom margins are overriden by 'vertical-rhythm-length'
+  // @note Used for normalization in IE < 8.
+  // @default null
+  // @default [IE < 8] $base-font-size 0
+  'list-margin': null,
+
+  // Customize the margin applied to 'dd' elements by default.
+  // @note Used for normalization
+  // @default null
+  // @default [IE < 8] 0 0 0 40px
+  'dd-margin': null,
+
+  // Customize the margin applied to 'figure' elements by default.
+  // @note Used for normalization.
+  // @note Top and bottom margins are overriden by 'vertical-rhythm-length'
+  // @default $base-font-size 40px
+  // @default [IE < 9] 0
+  'figure-margin': $base-font-size 40px,
+
+  // Customize the margin applied to 'hr' elements by defalt
+  // @note Top and bottom margins are overriden by 'vertical-rhythm-length'
+  // @note Opinionated
+  'hr-margin': null,
+
+  // Customize the border-style used to render 'hr' elements.
+  // @note Opinionated.
+  // @default null
+  'hr-style': null,
+
+  // Customize the margin applied to 'p' and 'pre' elements by default.
+  // @note Used for normalization in IE < 8.
+  // @default null
+  // @default [IE < 8] $base-font-size 0
+  'paragraph-margin': null,
+
+  // Customize the font-family applied to 'h1-h6' elements by default.
+  // @note Opinionated.
+  // @default null
+  'heading-font-family': null,
+
+  // Customize the font-weight applied to 'h1-h6' elements by default.
+  // @note Opinionated.
+  // @default null
+  'heading-font-weight': null,
+  
+  // Customize the text-rendering applied to 'h1-h6' elements by default.
+  // @note Opinionated.
+  // @default optimizeLegibility
+  'heading-text-rendering': optimizeLegibility,
+
+  // Customize font-size, line-height and margin for 'h1' element.
+  // @note Used to normalize headings in IE < 8.
+  // @note Opinionated for other browsers.
+  // @default 2em null (21.440px null)
+  'h1-font-size': 2 * $base-font-size,
+  'h1-line-height': null,
+  'h1-margin': 21.440px null,
+
+  // Customize font-size, line-height and margin for 'h2' element.
+  // @note Used to normalize headings in IE < 8.
+  // @note Opinionated for other browsers.
+  // @default 1.5em null (19.920px 0)
+  'h2-font-size': null,
+  'h2-line-height': null,
+  'h2-margin': null,
+
+  // Customize font-size, line-height and margin for 'h3' element.
+  // @note  Used to normalize headings in IE < 8.
+  // @note Opinionated for other browsers.
+  // @default 1.17em null (18.720px 0)
+  'h3-font-size': null,
+  'h3-line-height': null,
+  'h3-margin': null,
+
+  // Customize font-size, line-height and margin for 'h4' element.
+  // Used to normalize headings in IE < 8.
+  // @note Opinionated for other browsers.
+  // @default 1em null (21.280px 0)
+  'h4-font-size': null,
+  'h4-line-height': null,
+  'h4-margin': null,
+
+  // Customize font-size, line-height and margin for 'h5' element.
+  // @note Used for normalization in IE < 8.
+  // @note Opinionated for other browsers.
+  // @default null
+  // @default [IE < 8] 0.83em null (22.178px 0)
+  'h5-font-size': null,
+  'h5-line-height': null,
+  'h5-margin': null,
+
+  // Customize font-size, line-height and margin for 'h6' element.
+  // @note Used for normalization in IE < 8.
+  // @note Opinionated for other browsers.
+  // @default 0.83em null (24.978px 0)
+  'h6-font-size': null,
+  'h6-line-height': null,
+  'h6-margin': null,
+
+  // Whether to output '.h1-6' classnames to alias heading styles and
+  // decouple them from the html's 'h*' hierarchy.
+  // @note Opinionated.
+  // @default false
+  'heading-classnames': false,
+
+  // Customize transition between different link states.
+  // @note Opinionated.
+  // @default color 0.35s
+  'link-transition': color 0.35s,
+
+  // Customize color applied to links by default.
+  // @note Opinionated.
+  // @default #265C83
+  'link-color': #265C83,
+
+  // Customize text-decoarion applied to links by default.
+  // @note Shorthands are accepted, but 'text-decoration-line' MUST be
+  //    specified, and in first position to correctly be used as fallback.
+  // @note Used to disable 'text-decoration' on links by default
+  // @note Opinionated.
+  // @default none
+  'link-text-decoration': none,
+
+  // Customize color applied to links by default. Set to 'false' to
+  // disable change of colors on visited links.
+  // @note Opinionated.
+  // @default false
+  'link-color-visited': false,
+
+  // Customize background applied to focused links by default.
+  // @note Used to remove background on focused links in IE 10.
+  // @default transparent
+  'link-background-focus': transparent,
+
+  // Customize outline applied to focused links [null].
+  // @note Opinionated.
+  // @default null
+  'link-outline-focus': null,
+
+  // Customize color applied to focused links.
+  // @note Opinionated.
+  // @default null
+  'link-color-focus': null,
+
+  // Customize background applied to focused links.
+  // @note Opinionated.
+  // @default #7FDBFF
+  'link-color-hover': #7FDBFF,
+
+  // Customize background applied to focused links.
+  // @note Opinionated.
+  // @default #007BE6
+  'link-color-active': #007BE6,
+
+  // Customize outline of active and hovered links.
+  // @note Used to remove outline on focused links when also active or hovered.
+  // @default 0
+  'link-outline-focus-active': 0,
+
+  // Customize text-decoration applied on 'abbr[title]' elements.
+  // @note Accepts text-decoration shorthands, but 'text-decoration-line' MUST
+  //    be specified, and in first position to be properly used as fallback.
+  // @note Used for normalization.
+  // @default underline dotted
+  'abbr-title-text-decoration': underline dotted,
+
+  // Customize font-weight used on 'b' and 'strong' elements.
+  // @note Used for normalization.
+  // @default bolder
+  'strong-font-weight': bolder,
+
+  // Customize font-family used on elements defaulting to monospace font.
+  // @note Used to prevent browsers from resizing default monospace fonts.
+  // @default monospace
+  'monospace-font-family': monospace,
+
+  // Customize font-size used on elements defaulting to monospace font.
+  // @note Used to prevent browsers from resizing default monospace fonts.
+  // @default $base-font-size
+  'monospace-font-size': $base-font-size,
+
+  // Customize the font-style applied 'dfn' elements
+  // @note Used for normalization.
+  // @default italic
+  'dfn-font-style': italic,
+
+  // Customize the glyph inserted before 'q' elements
+  // @note Used for normalization.
+  // @default none
+  'q-glyph-before': '«',
+
+  // Customize the glyph inserted after 'q' elements.
+  // @note Used for normalization.
+  // @default none
+  'q-glyph-after': '»',
+
+  // Customize the background applied to 'mark' elements.
+  // @note Used for normalization.
+  // @default #ff0
+  'mark-background': #ff0,
+
+  // Customize the color applied to 'mark' elements.
+  // @note Used for normalization.
+  // @default #000
+  'mark-color': #000,
+
+  // Customize the text-shadow applied to 'mark' elements.
+  // @note Used to improve readability by disablin text shadow by default.
+  // @note Opinionated.
+  // @default #000
+  'mark-text-shadow': none,
+
+  // Customize the font-size applied to 'small' elements by default.
+  // @note Used for normalization.
+  // @default 80%
+  'small-font-size': 80%,
+
+  // Customize the font-size applied to 'sub' and 'sup' elements by default.
+  // @note Used for normalization.
+  // @default 75%
+  'sub-sup-font-size': 75%,
+
+  // Customize the color applied to selected text by default.
+  // @note Opinionated.
+  // @default null
+  'selection-color': null,
+
+  // Customize the background-color applied to selected text by default.
+  // @note Opinionated.
+  // @default null
+  'selection-background-color': null,
+
+  // Customize the color applied to selected text by default.
+  // @note Used to improve readability by disabling text-shadow on selection
+  // @note Opinionated.
+  // @default none
+  'selection-text-shadow': none,
+
+  // Select how users can resize textareas by default.
+  // @note Used to limit to vertical resizing
+  // @note Opinionated.
+  // @default vertical
+  'textarea-resize': vertical,
+
+  // Customize the margin applied to 'fieldset' by default
+  // @note Used to reset fieldset styles
+  // @note Opinionated.
+  // @default 0
+  'fieldset-margin': 0,
+
+  // Customize the padding applied to 'fieldset' by default
+  // @note Used to reset fieldset styles
+  // @note Opinionated.
+  // @default 0
+  'fieldset-padding': 0,
+
+  // Customize the border applied to 'fieldset' by default
+  // @note Used to reset fieldset styles
+  // @note Opinionated.
+  // @default 0
+  'fieldset-border': 0,
+
+  // Whether the 'clearfix' utility should contain top-margins of child
+  // elements like most clearfixing methods do.
+  // @note Utility.
+  // @default true
+  'clearfix-contain-margins': true,
+
+  // Aspect ratio utility modifiers to create. Each entry maps a class
+  // modifier to the object's width and height
+  // @note Utility.
+  // @default '16by9', '4by3' and 'square'
+  'aspect-ratios': (
+    '16by9': 16 9,
+    '4by3': 4 3,
+    'square': 1 1
+  ),
+
+  // Default 'z-index' to apply to aspect ratio object.
+  // @note Utility.
+  // @default 100
+  'aspect-ratio-z-index': 100
+);
+
+$_tune-legacy-defaults: (
+  'h1-font-size': 2 * $base-font-size,
+  'h1-line-height': null,
+  'h1-margin': 21.440px 0,
+  'h2-font-size': 1.5 * $base-font-size,
+  'h2-line-height': null,
+  'h2-margin': 19.920px 0,
+  'h3-font-size': 1.17 * $base-font-size,
+  'h3-line-height': null,
+  'h3-margin': 18.720px 0,
+  'h4-font-size': 1 * $base-font-size,
+  'h4-line-height': null,
+  'h4-margin': 21.280px 0,
+  'h5-font-size': 0.83 * $base-font-size,
+  'h5-line-height': null,
+  'h5-margin': 22.178px 0,
+  'h6-font-size': 0.67 * $base-font-size,
+  'h6-line-height': null,
+  'h6-margin': 24.978px 0,
+  'blockquote-margin': 1em 40px,
+  'list-margin': $base-font-size 0,
+  'dd-margin': 0 0 0 40px,
+  'paragraph-margin': 1em 0,
+);

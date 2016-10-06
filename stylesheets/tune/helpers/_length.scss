@@ -3,7 +3,11 @@
 // ============================================================================
 
 @import "aleksi/lengths/convert";
+@import "tune/defaults/lengths";
 @import "tune/settings";
+
+// Inject Tune defaults
+$tune-units: map-merge($_tune-unit-defaults, $tune-units);
 
 /// tune-length($val, $unit[, $args... ])
 /// ---------------------------------------------------------------------------
@@ -43,22 +47,12 @@
 /// Returns the unit conversion function, as defined by developer
 
 // Defaults injected by Tune-css
-$_tune-units: map-merge((
-  'em': 'to-em',
-  'rem': 'to-rem',
-  '%': 'to-percent',
-  'px': 'to-px',
-  'in': 'to-in',
-  'mm': 'to-mm',
-  'cm': 'to-cm',
-  'pt': 'to-pt',
-  'pc': 'to-pc',
-), $tune-units);
+
 
 @function _tune-unit-fn($unit)
 {
   // check if developer defined a unit conversion function
-  $fn: map-get($_tune-units, $unit);
+  $fn: map-get($tune-units, $unit);
 
   // warn if function was not found or does not exist
   @if not $fn or not function-exists($fn) {

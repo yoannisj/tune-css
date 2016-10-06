@@ -8,4 +8,6 @@ Tune-css also sets vertical-rhythm using the techniques described by Harry Rober
 
 ## Credits
 
-Tune-css started as a fork from John Albin's [normalize-scss](), a normalize.css port to Sass. It allows more fine-grainded tuning out of the box, tests for browser support more precisely, and adds more opinionated styles. But again, all these additions can be easily removed using the configuration options.
+Tune-css started as a fork from John Albin's [normalize-scss](https://github.com/JohnAlbin/normalize-scss), a normalize.css port to Sass. It allows more fine-grainded tuning out of the box, tests for browser support more precisely, and adds more opinionated styles.
+
+These additions come mainly from the works of [Adam Morse](http://mrmrs.cc/) and [Harry Roberts](http://csswizardry.com/).

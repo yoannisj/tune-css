@@ -45,11 +45,23 @@ $base-color: $text-color !default;
 // ----------------------------------------------------------------------------
 // Settings specific to Tune.css and/or used internally
 
-// Find documentation and default values in 'tune/helpers/length'.
-$tune-units: () !default;
-
-// Find documentation and default values in 'tune/helpers/settings'.
+// Find documentation and default values in 'tune/defaults'.
 $tune-settings: () !default;
 
-// Find documentation and default values in 'tune/helpers/util'.
+// Find documentation and default values in 'tune/defaults'.
+$tune-units: () !default;
+
+// Find documentation and default values in 'tune/defaults'.
 $tune-util-classnames: () !default;
+
+// Support-for Settings
+// ----------------------------------------------------------------------------
+// Variables used by 'suppor-for' to check if a given browser is supported
+
+// List of supported browsers
+// @note Used by 'support-for' to check if browser is supported
+$support-for: () !default;
+
+// List of latest browser versions
+// @note Used by 'support-for' to check if browser is supported
+$support-for-current-browser-verion: () !default;

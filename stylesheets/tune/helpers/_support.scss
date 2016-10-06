@@ -3,40 +3,15 @@
 // ============================================================================
 
 @import "support-for";
-@import 'tune/settings';
+@import 'tune/defaults/support';
+@import "tune/settings";
 
-$support-for: map-merge((
-  'chrome':  -4,
-  'edge':    -4,
-  'firefox': -4,
-  'ie':      9,
-  'opera':   -4,
-  'safari':  -4,
-  'and_chr': -4,
-  'ie_mob':  -4,
-  'ios_saf': -4,
-  'op_mob':  null,
-  'op_mini': -4,
-  "android": -4,
-  'samsung': -4,
-), $support-for);
-
-// Set the current version number for all browsers. As of: 2016-04-30
-$support-for-current-browser-version: map-merge((
-  'chrome':  50,
-  'edge':    25,
-  'firefox': 46,
-  'ie':      11,
-  'opera':   36,
-  'safari':  9,
-  'and_chr': 51,
-  'ie_mob':  11,
-  'ios_saf': 10,
-  'op_mob':  37,
-  'op_mini': null,
-  "android": 4,
-  'samsung': 4,
-), $support-for-current-browser-version);
+// Inject Tune-css defaults
+$support-for: map-merge($_tune-support-for, $support-for);
+$support-for-current-browser-version: map-merge(
+  $_tune-current-browser-version,
+  $support-for-current-browser-version
+);
 
 /// tune-supports()
 /// ---------------------------------------------------------------------------
