@@ -8,7 +8,7 @@
 
 @mixin tune-selection {
   color: tune-setting('selection-color'); /* [2] */
-  background: tune-setting('selection-background-color'); /* [2] */
+  background: tune-setting('selection-background-color'); /* [1, 2] */
   text-shadow: tune-setting('selection-text-shadow'); /* [1, 3] */
 }
 

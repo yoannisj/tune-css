@@ -6,6 +6,19 @@
  * @link https://github.com/yoannisj/tune-css
 **/
 
+$tune-settings: (
+
+  'vertical-rhythm': true,
+  'single-direction-margins': true,
+  'margin-units': 'rem',
+
+);
+
+// @Todo: implement blockquote quotes?
+// @Todo: impement form styles
+// @Todo implement Buttons?
+// @Todo implement Diatonic Typescale?
+
 @import "tune/settings";
 
 // Helpers

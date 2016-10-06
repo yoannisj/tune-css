@@ -163,8 +163,8 @@ $_tune-defaults: (
 
   // Customize color applied to links by default.
   // @note Opinionated.
-  // @default #265C83
-  'link-color': #265C83,
+  // @default #265c83
+  'link-color': #265c83,
 
   // Customize text-decoarion applied to links by default.
   // @note Shorthands are accepted, but 'text-decoration-line' MUST be
@@ -197,8 +197,8 @@ $_tune-defaults: (
 
   // Customize background applied to focused links.
   // @note Opinionated.
-  // @default #7FDBFF
-  'link-color-hover': #7FDBFF,
+  // @default #b3d4fc
+  'link-color-hover': #b3d4fc,
 
   // Customize background applied to focused links.
   // @note Opinionated.
@@ -280,8 +280,8 @@ $_tune-defaults: (
 
   // Customize the background-color applied to selected text by default.
   // @note Opinionated.
-  // @default null
-  'selection-background-color': null,
+  // @default #b3d4fc
+  'selection-background-color': #b3d4fc,
 
   // Customize the color applied to selected text by default.
   // @note Used to improve readability by disabling text-shadow on selection
