@@ -289,29 +289,95 @@ $_tune-defaults: (
   // @default none
   'selection-text-shadow': none,
 
+  // Customize the margin applied to 'form' by default.
+  // @note used to normalize forms in IE > 8.
+  // @note Opinionated in other browsers.
+  // @default 0
+  'form-margin': 0, 
+
+  // Customize the margin applied to 'fieldset' by default.
+  // @note Used to reset fieldset styles.
+  // @note Opinionated.
+  // @default 0
+  'fieldset-margin': 0,
+
+  // Customize the padding applied to 'fieldset' by default.
+  // @note Used to reset fieldset styles.
+  // @note Opinionated.
+  // @default 0
+  'fieldset-padding': 0,
+
+  // Customize the border applied to 'fieldset' by default.
+  // @note Used to reset fieldset styles.
+  // @note Opinionated.
+  // @default 0
+  'fieldset-border': 0,
+
+  // Customize the font applied to form controls by default.
+  // @note applied to 'button', 'input', 'select', 'optgroup' and 'textarea'.
+  // @note Used to normalize font across browsers.
+  // @default inherit
+  'form-control-font': inherit,
+
+  // Customize the margin applied to form controls by default.
+  // @note applied to 'button', 'input', 'select', 'optgroup' and 'textarea'.
+  // @note Used to remove margin in Firefox and Safari.
+  // @default 0
+  'form-control-margin': 0,
+
+  // Customize the line-height applied to single-line form controls by default.
+  // @note applied to 'button', 'input', 'select', 'optgroup'.
+  // @note Used to remove margin in Firefox and Safari.
+  // @default 0
+  'form-control-line-height': null,
+
+  // Customize the line-height applied to multi-line form controls by default.
+  // @note applied to 'textarea'.
+  // @note Opinionated.
+  // @default inherit
+  'form-control-multiline-height': inherit,
+
+  // Customize the appearance applied to buttons by default.
+  // @note Used to enable styling of clickable types in iOs and Safari.
+  // @default button
+  'button-appearance': button,
+
+  // Customize the overflow applied to 'button' by default.
+  // @note Used to show overflow in IE.
+  // @default visible
+  'button-overflow': visible,
+
+  // Customize the background applied to 'button' by default.
+  // @note Used to remove background-image applied to Firefox Android < 35.
+  // @note Opinionated
+  // @default #e0e0e0
+  // @default [Firefox Android < 34] none
+  'button-background': #e0e0e0,
+
+  // 'button-color': #222,
+  // 'button-border-radius': 3px,
+  // 'button-border': 1px solid #c0c0c0,
+
+  // Customize the text-transform applied to 'button' by default.
+  // @note Used to remove text-transform inheritence in Edge, Firefox and IE.
+  // @default none
+  'button-text-transform': none,
+
+  // Customize the text-transform applied to 'button' by default.
+  // @note Used to remove text-transform inheritence in Edge, Firefox and IE.
+  // @default none
+  'select-text-transform': none,
+
+  // Customize the overflow applied to 'textarea' by default.
+  // @note Used to remove vertical scrollbars in IE.
+  // @default auto
+  'textarea-overflow': auto,
+
   // Select how users can resize textareas by default.
   // @note Used to limit to vertical resizing
   // @note Opinionated.
   // @default vertical
   'textarea-resize': vertical,
-
-  // Customize the margin applied to 'fieldset' by default
-  // @note Used to reset fieldset styles
-  // @note Opinionated.
-  // @default 0
-  'fieldset-margin': 0,
-
-  // Customize the padding applied to 'fieldset' by default
-  // @note Used to reset fieldset styles
-  // @note Opinionated.
-  // @default 0
-  'fieldset-padding': 0,
-
-  // Customize the border applied to 'fieldset' by default
-  // @note Used to reset fieldset styles
-  // @note Opinionated.
-  // @default 0
-  'fieldset-border': 0,
 
   // Whether the 'clearfix' utility should contain top-margins of child
   // elements like most clearfixing methods do.
@@ -358,4 +424,7 @@ $_tune-legacy-defaults: (
   'list-margin': $base-font-size 0,
   'dd-margin': 0 0 0 40px,
   'paragraph-margin': 1em 0,
+  'form-control-line-height': normal,
+  'button-overflow': visible,
+  'button-background-image': none,
 );
