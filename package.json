@@ -1,6 +1,6 @@
 {
   "name": "tune-css",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A configurable base stylesheet for all browsers and devices.",
   "main": "index.js",
   "directories": {
