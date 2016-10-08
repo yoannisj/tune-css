@@ -69,7 +69,7 @@ html
 }
 
 @if tune-setting('base-box-sizing')
-  and not tune-setting('base-box-sizing') == content-box
+  and tune-setting('base-box-sizing') != content-box
 {
   *,
   *:before, 
