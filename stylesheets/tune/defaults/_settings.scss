@@ -5,6 +5,13 @@
 @import "tune/defaults/common";
 
 $_tune-defaults: (
+
+  // Box-sizing to use on all elements by default.
+  // @link https://www.paulirish.com/2012/box-sizing-border-box-ftw/
+  // @note Opinionated.
+  // @default null
+  'base-box-sizing': border-box,
+
   // Whether to set vertical rhythm once for all block-level grouping elments.
   // @link http://csswizardry.com/2012/06/single-direction-margin-declarations/
   // @note  Opinionated.

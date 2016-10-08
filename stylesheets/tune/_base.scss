@@ -27,8 +27,9 @@
  * 7. Prevent's readability issues when the operating system's color scheme sets
  *    the window background to a color which might make text unreadable.
  *    @link http://24ways.org/2007/css-for-accessibility/
- * 8. Allow develipr to customize the color and background applied to 'html'
- * 9. Allow developer to further tune default 'html' styles
+ * 8. Set a more useful box-sizing default for all elements.
+ * 9. Allow developer to customize the color and background applied to 'html'
+ * 10. Allow developer to further tune default 'html' styles
  * ----------------------------------------------------------------------------
  */
 
@@ -43,6 +44,13 @@ html
     font-size: percentage($root-font-size / 16px); /* [6] */
   }
 
+  @if tune-setting('base-box-sizing')
+    and tune-setting('base-box-sizing') != content-box
+  {
+    -webkit-box-sizing: tune-setting('base-box-sizing'); /* [8] */
+    box-sizing: tune-setting('base-box-sizing'); /* [8] */
+  }
+
   $text-inflation: tune-setting('text-size-adjust');
   // fix bug in Webkit where 'none' would break the ability for users to zoom
   $text-inflation: if($text-inflation == 'none', 100%, $text-inflation);
@@ -52,11 +60,23 @@ html
   -ms-text-size-adjust: $text-inflation; /* [2, 4] */
   text-size-adjust: $text-inflation; /* [2, 4, 5] */
 
-  color: $base-color; /* [7, 8] */
-  background: $base-background; /* [7, 8] */
+  color: $base-color; /* [7, 9] */
+  background: $base-background; /* [7, 9] */
 
   @if tune-has-hook('root') {
-    @include tune-html(); /* [9] */
+    @include tune-html(); /* [10] */
+  }
+}
+
+@if tune-setting('base-box-sizing')
+  and not tune-setting('base-box-sizing') == content-box
+{
+  *,
+  *:before, 
+  *:after
+  {
+    -webkit-box-sizing: inherits; /* [8] */
+    box-sizing: inherits; /* [8] */
   }
 }
 
