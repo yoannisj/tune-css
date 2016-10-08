@@ -1,0 +1,155 @@
+// ============================================================================
+// Tune-css Typography Helpers
+// ============================================================================
+
+@import "aleksi/lists/walk";
+@import "aleksi/sides/side-value";
+@import "aleksi/sides/sides-shorthand";
+@import "aleksi/sides/expand-sides";
+@import "aleksi/sides/output-sides";
+@import "tune/helpers/setting";
+@import "tune/helpers/length";
+@import "tune/partials/vertical-rhythm";
+
+/// tune-heading( $level)
+/// ---------------------------------------------------------------------------
+
+@mixin tune-heading-level($lvl)
+{
+  // Output font-size
+  $font-size: tune-setting('h#{$lvl}-font-size');
+  @include tune-length('font-size', $font-size, 'em');
+
+  // Output line-height
+  $line-height: tune-setting('h#{$lvl}-line-height');
+  @if $line-height
+  {
+    // default to browser defaulted font-size
+    @if not $font-size {
+      $font-size: _tune-legacy-setting('h#{$lvl}-font-size');
+    }
+
+    @include tune-line-height($line-height, $font-size); /* [2, 3] */
+  }
+
+  // Output margins
+  @if tune-setting('vertical-rhythm')
+    or tune-setting('h#{$lvl}-margin')
+  {
+    @include tune-vertical-rhythm(tune-setting('h#{$lvl}-margin')); /* [4] */
+  }
+
+  // Legacy output
+  @else if $lvl != 1 and tune-supports('ie' 7)
+  {
+    @include tune-length('font-size', _tune-legacy-setting('h#{$lvl}-font-size'), 'em');
+    @include tune-vertical-rhythm(_tune-legacy-setting('h#{$lvl}-margin'), 'em'); /* [2, 4] */
+  }
+}
+
+/// tune-vertical-rhyhtm( $margin[, $unit, $args... ])
+/// ---------------------------------------------------------------------------
+
+@mixin tune-vertical-rhythm($margin, $units: tune-setting('margin-units'), $args...)
+{
+  // use default vertical-rhyhtm-margin for vertical margins when applies
+  @if tune-setting('vertical-rhythm')
+  {
+    // extend 'top' and 'bottom' margins
+    @extend %tune-vertical-rhythm;
+
+    // output 'left' and 'right' margins only
+    $margin: expand-sides($margin);
+    $margin: set-nth($margin, 1, null);
+    $margin: set-nth($margin, 3, null);
+
+    @include tune-margin($margin, $units, $args...);
+  }
+
+  @else {
+    @include tune-margin($margin, $units, $args...);
+  }
+}
+
+/// tune-margin( $margin[, $unit, $args... ])
+/// ---------------------------------------------------------------------------
+
+@mixin tune-margin($margin, $units: tune-setting('margin-units'), $args...)
+{
+  // convert margin lengths to correct unit
+  $lengths: ();
+  @each $side in const('CSS_LAYOUT_SIDES') {
+    $m: side-value($margin, $side);
+    $u: side-value($units, $side);
+    $lengths: append($lengths, tune-length($m, $u, $args...));
+  }
+  
+  // set 'top' length to 0 if using single-direction-margins
+  @if tune-setting('single-direction-margins')
+    and side-value($lengths, 'top')
+  {
+    $lengths: set-nth($lengths, 1, 0);
+  }
+
+  // output margins in shortest form as possible
+  @include output-sides('margin', $lengths);
+}
+
+/// tune-line-height( $font-size, $line-height, $args... )
+/// ---------------------------------------------------------------------------
+
+@mixin tune-line-height($line-height, $font-size: $base-font-size, $args...)
+{
+  // optionally include line-height (as unitless ratio)
+  @if $line-height {
+    $fs: tune-length($font-size, 'px', $args...);
+    line-height: tune-length($line-height, 'px', $fs) / $fs;
+  }
+}
+
+/// tune-typescale( $font-size, $line-height, $args... )
+/// ---------------------------------------------------------------------------
+
+@mixin tune-typescale($font-size, $line-height: null, $args...)
+{
+  font-size: tune-length($font-size, 'em', $args...);
+
+  // optionally include line-height (as unitless ratio)
+  @if $line-height {
+    $fs: tune-length($font-size, 'px', $args...);
+    line-height: tune-length($line-height, 'px', $fs) / $fs;
+  }
+}
+
+/// tune-monospace-family( $family )
+/// ---------------------------------------------------------------------------
+/// appends 'monospace' to the given monospace font-family to avoid font
+/// resizing by all major browsers.
+// @link http://code.stephenmorley.org/html-and-css/fixing-browsers-broken-monospace-font-handling/
+
+@function tune-monospace-family( $family )
+{
+  // repeat default 'monospace' family
+  @if $family == monospace {
+    @return (monospace, monospace);
+  }
+
+  // make sure the last item in the font family is 'monospace'
+  @if index($family, monospace) != length($family) {
+    @return append($family, monospace, 'comma');
+  }
+
+  @return $family;
+}
+
+/// tune-monospace-family( $family )
+/// ---------------------------------------------------------------------------
+/// Includes monospace font-family. Adds 'monospace' to the given font-family
+/// to avoid font resizing by all major browsers.
+// @link http://code.stephenmorley.org/html-and-css/fixing-browsers-broken-monospace-font-handling/
+
+@mixin tune-monospace-family( $family )
+{
+  font-face: tune-monospace-family($family);
+}
+

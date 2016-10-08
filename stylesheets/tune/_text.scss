@@ -1,0 +1,278 @@
+/**
+ * = Tune-css Text
+ * ============================================================================
+ */
+
+@import "tune/helpers/support";
+@import "tune/helpers/setting";
+@import "tune/helpers/length";
+@import "tune/helpers/hook";
+@import "tune/helpers/typography";
+@import "tune/helpers/text";
+
+// @Todo: Add styles for 'selection'
+
+/**
+ * ----------------------------------------------------------------------------
+ * Normalize.css
+ * 1. Remove the bottom border in Firefox <40.
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ * ----------------------------------------------------------------------------
+ * Tune.css
+ * 3. Allow developers to customize abbreviation's default text decoration
+ * 4. Fallback to 'text-decoration-line' for browsers not supporting
+ *    shorthand and CSS3 'text-decoration-*' properties.
+ *    @link http://caniuse.com/#feat=text-decoration
+ * 5. Allow developers to further customize 'abbr' default styles
+ */
+
+// @Todo: check if text-decoration is correctly applied in modern browsers
+// without setting the 'text-decoration' property twice, or if this is just a
+// fix for the shortand
+
+abbr
+{
+  @if tune-supports('firefox' 39) {
+    border-bottom: none; /* [1] */
+  }
+
+  &[title]
+  {
+    $abbr-title-text-decoration: tune-setting('abbr-title-text-decoration', underline dotted);
+    @include tune-text-decoration($abbr-title-text-decoration); /* [2, 3, 4] */
+
+    @if tune-has-hook('abbr') {
+      @include tune-abbr(); /* [5] */
+    }
+  }
+}
+
+@if tune-setting('strong-font-weight') == bolder
+  and tune-supports('safari', 6)
+{
+  /**
+    * ----------------------------------------------------------------------------
+   * Normalize.css
+   * 1. Prevent the duplicate application of `bolder` by next rule in Safari 6.
+   * ----------------------------------------------------------------------------
+   */
+
+  b, strong {
+    font-weight: inherit; /* [1] */
+  }
+}
+
+@if tune-supports('chrome', 'edge', 'safari')
+  or tune-setting('strong-font-weight')
+{
+  /**
+   * ----------------------------------------------------------------------------
+   * Normalize.css
+   * 1. Add the correct font weight in Chrome, Edge, and Safari.
+   * ----------------------------------------------------------------------------
+   * Tune.css
+   * 2. Allow developer to cusotmize the 'b' and 'strong' font-weight
+   * ----------------------------------------------------------------------------
+   */
+
+  b,
+  strong {
+    font-weight: tune-setting('strong-font-weight'); /* [1, 2] */
+  }
+}
+
+// Apply styles for monospace fonts
+// --------------------------------
+
+@import "tune/partials/monospace-font";
+
+code,
+kbd,
+samp
+{
+  @extend %tune-monospace-font;
+}
+
+@if tune-supports('android' 4)
+  or tune-setting('dfn-font-style')
+  or tune-has-hook('dfn')
+{
+  /**
+   * ----------------------------------------------------------------------------
+   * Normalize.css
+   * 1. Add the correct font style in Android <4.4.
+   * ----------------------------------------------------------------------------
+   * Tune.css
+   * 2. Allow developer to customize the 'dfn' font-style
+   * 3. Allow developer to further customize the 'dfn' default styles
+   * ----------------------------------------------------------------------------
+   */
+
+  dfn {
+    @if tune-supports('android' 4) {
+      font-style: tune-setting('dfn-font-style', italic); /* [1, 2] */
+    }
+
+    @if tune-has-hook('dfn') {
+      @include tune-dfn;
+    }
+  }
+}
+
+@if tune-setting('q-glyph-before')
+  or tune-setting('q-glyph-after')
+  or tune-supports('safari' 4)
+  or tune-supports('ie' 7)
+{
+  /**
+   * ----------------------------------------------------------------------------
+   * Normalize.css
+   * 1. Address CSS quotes not supported in IE 6/7.
+   * 2. Address `quotes` property not supported in Safari 4.
+   * ----------------------------------------------------------------------------
+   * Tune.css
+   * 3. Quotes can not be applied via CSS to ie < 8 so, better remove the CSS
+   *    quotes and add them using Html if we need to support ie < 8.
+   * 4. Normalize glyphs inserted before and after 'q' elements.
+   * 5. Allow developers to customize glyphs inserted before and after 'q'
+   *    elements by default (does not work if support for IE < 7).
+   * ----------------------------------------------------------------------------
+   */
+
+  q
+  {
+    @if tune-supports('ie' 7)
+    {
+      quotes: none; /* [1, 3] */
+      
+      @if tune-supports('safari' 4)
+      {
+        &:before, &:after {
+          content: ""; /* [2, 3] */
+          content: none; /* [2, 3] */
+        }
+      }
+    }
+
+    @else if tune-supports('safari' 4)
+    {
+      quotes: none; /* [2] */
+      &:before {
+        content: "#{tune-setting('q-glyph-before')}"; /* [2, 4, 5] */
+      }
+      &:after {
+        content: "#{tune-setting('q-glyph-after')}"; /* [2, 4, 5] */
+      }
+    }
+
+    @else {
+      quotes: "#{tune-setting('q-glyph-before')}" "#{tune-setting('q-glyph-after')}"; /* [4, 5] */
+    }
+  }
+}
+
+@if tune-supports('ie' 9)
+  or tune-setting('mark-color')
+  or tune-setting('mark-background')
+  or tune-setting('mark-text-shadow')
+  or tune-has-hook('mark')
+{
+  /**
+   * ----------------------------------------------------------------------------
+   * Normalize.css
+   * 1. Add the correct background and color in IE <10.
+   * ----------------------------------------------------------------------------
+   * 2. Improve readability by disabling text-shadow by default
+   * 3. Allow developer to customize 'mark' color, background and text-shadow
+   */
+
+  mark {
+    @if tune-supports('ie' 9) {
+      background: tune-setting('mark-background'); /* [1, 3] */
+      color: tune-setting('mark-color'); /* [1, 3] */
+      text-shadow: tune-setting('mark-text-shadow'); /* [2, 3] */
+    }
+
+    @if tune-has-hook('mark') {
+      @include tune-mark;
+    }
+  }
+}
+
+/**
+ * ----------------------------------------------------------------------------
+ * Normalize.css
+ * 1. Add the correct font size in all browsers.
+ * ----------------------------------------------------------------------------
+ * Tune.css
+ * 2. Allow developers to customize 'small' default font-size
+ * ----------------------------------------------------------------------------
+ */
+
+small {
+  font-size: tune-length(tune-setting('small-font-size'), '%'); /* [1, 2] */
+}
+
+@if tune-setting('small-util')
+{
+  .small {
+    @extend small;
+  }
+}
+
+/**
+ * ----------------------------------------------------------------------------
+ * Normalize.css
+ * 1. Prevent `sub` and `sup` elements from affecting the line height in
+ *    all browsers.
+ * ----------------------------------------------------------------------------
+ * Tune.css
+ * 2. Allow developer to customize 'sub' and 'sup' default font-size
+ * ----------------------------------------------------------------------------
+ */
+
+// @TODO: test sub and sup offset with other 'sub-sup-font-size' and find
+// formula to correct it if necessary. Maybe the following?
+// $sub-offset: 100% - $sub-sup-font-size;
+// $sup-offset: 50% + $sub-offset - $sub-sup-font-size;
+// Actually, since offsets are in 'em' they are already relative to
+// 'sub-sup-font-size' and therefore should not change..
+// It could depend on the font and then it should be a setting
+
+sub,
+sup {
+  font-size: tune-length(tune-setting('sub-sup-font-size'), '%'); /* [1, 2] */
+  line-height: 0; /* [1] */
+  position: relative; /* [1] */
+  vertical-align: baseline; /* [1] */
+
+  @if tune-has-hook('sub-sup') {
+    @include tune-sub-sup;
+  }
+}
+
+sub {
+  bottom: -0.25em; /* [1] */
+}
+
+sup {
+  top: -0.5em; /* [1] */
+}
+
+@if tune-setting('selection-color')
+  or tune-setting('selection-background')
+  or tune-setting('selection-text-shadow')
+{
+  /**
+   * ----------------------------------------------------------------------------
+   * H5bp
+   * 1. Remove 'text-shadow' on selection by default
+   * ----------------------------------------------------------------------------
+   * Tune.css
+   * 2. Allow developer to customize default 'color', 'background' on selection
+   * 3. Allow developer to customize default 'text-shadow' on selection
+   */
+
+  ::-moz-selection { @include tune-selection; }
+  ::selection { @include tune-selection; }
+}

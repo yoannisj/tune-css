@@ -1,0 +1,34 @@
+// ============================================================================
+// Tune-css Setting Helper
+// ============================================================================
+
+@import "tune/defaults/settings";
+@import "tune/settings";
+
+// Inject Tune defaults
+$tune-settings: map-merge($_tune-defaults, $tune-settings);
+
+/// tune-setting($name)
+/// ---------------------------------------------------------------------------
+/// Returns the value of a Tune.css specific setting, or uses a given default
+/// value if the setting is not defined
+
+@function tune-setting($name, $default: null)
+{
+  @if map-has-key($tune-settings, $name) {
+    @return map-get($tune-settings, $name);
+  }
+
+  @return $default;
+}
+
+/// _tune-legacy-setting($name)
+/// ---------------------------------------------------------------------------
+/// Returns the value of a setting as found in Normalize v1, in order to
+/// normalize legacy browsers.
+
+@function _tune-legacy-setting($name)
+{
+  // or use default value to normalize legacy browsers
+  @return map-get($_tune-legacy-defaults, $name);
+}

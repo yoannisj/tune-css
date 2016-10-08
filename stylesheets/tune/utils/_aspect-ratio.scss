@@ -1,0 +1,54 @@
+// ============================================================================
+// Tune-css AspectRatio Util
+// ============================================================================
+
+@import "tune/helpers/setting";
+@import "tune/helpers/util";
+
+/**
+ * ----------------------------------------------------------------------------
+ * mrmrs/Fluidity
+ * 1. Aspect ratios for media objects i.e canvas, iframe, video, svg, etc.
+ *    @link http://alistapart.com/article/creating-intrinsic-ratios-for-video
+ * ----------------------------------------------------------------------------
+ * Tune.css
+ * 2. Allow developer to customize aspect ratio objects' default 'z-index'
+ * 3. Allow developer to create utility for multiple aspect ratios
+ * 4. Allow developer to change the utility's classname
+ * ----------------------------------------------------------------------------
+*/
+
+.#{tune-util-classname('aspect-ratio')} /* [4] */
+{
+  height: 0;  /* [1] */
+  position: relative; /* [1] */
+
+  > * {
+    position: absolute;
+    top: 0; /* [1] */
+    right: 0; /* [1] */
+    bottom: 0; /* [1] */
+    left: 0; /* [1] */
+    z-index: tune-setting('aspect-ratio-z-index'); /* [1, 2] */
+  }
+
+  @if tune-setting('aspect-ratios')
+  {
+    @at-root
+    {
+      @each $ratio, $aspect in tune-setting('aspect-ratios')
+      {
+        $selector: #{&}--#{$ratio};
+        $width: nth($aspect, 1);
+        $height: nth($aspect, 2);
+
+        // @error "aspect classname:: #{$classname}";
+
+        #{$selector} /* [3, 4] */
+        {
+          padding: percentage($height / $width) 0 0; /* [3] */
+        }
+      }
+    }
+  }
+}

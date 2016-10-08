@@ -1,0 +1,254 @@
+/**
+ * = Tune-css Grouping
+ * ============================================================================
+ */
+
+@import "aleksi/sides/output-sides";
+@import "tune/helpers/setting";
+@import "tune/helpers/hook";
+@import "tune/helpers/support";
+@import "tune/helpers/typography";
+
+@if tune-setting('vertical-rhythm')
+  or tune-setting('blockquote-margin')
+  or tune-has-hook('blockquote')
+  or tune-supports('ie' 7)
+{
+  /**
+   * ----------------------------------------------------------------------------
+   * Normalize.css
+   * 1. Set correct margin in all browsers and set missing indentation in IE 6/7
+   * ----------------------------------------------------------------------------
+   * Tune.css
+   * 2. Set vertical-rhythm on block-level grouping elements once and for all
+   * 3. Allow developers to customize 'blockquote default margin and indentation
+   * 4. Allow developer to further customize default 'blockquote' styles
+   * ----------------------------------------------------------------------------
+   */
+
+  blockquote
+  {
+    @if tune-setting('vertical-rhythm')
+      or tune-setting('blockquote-margin')
+    {
+      @include tune-vertical-rhythm(tune-setting('blockquote-margin')); /* [1, 2] */
+    }
+
+    @else if tune-supports('ie' 7) {
+      margin: _tune-legacy-setting('blockquote-margin'); /* [1, 2] */
+    }
+
+    @if tune-has-hook('blockquote') {
+      @include tune-blockquote;
+    }
+  }
+}
+
+@if tune-setting('vertical-rhythm')
+  or tune-setting('list-margin')
+  or tune-has-hook('list')
+  or tune-supports('ie' 7)
+{
+  /**
+   * ----------------------------------------------------------------------------
+   * Normalize.css
+   * 1. Address margins set differently in IE 6/7.
+   * ----------------------------------------------------------------------------
+   * Tune.css
+   * 2. Allow developer to customize 'dl', 'menu', ol', 'ul' default margins
+   * 3. Allow developer to further customize 'dl', 'menu', 'ol', 'ul' defaults
+   * 4. Remove margins on nested lists
+   */
+
+  dl,
+  menu,
+  ol,
+  ul
+  {
+    @if tune-setting('vertical-rhythm')
+      or tune-setting('list-margin')
+    {
+      @include tune-vertical-rhythm(tune-setting('list-margin')); /* [1, 2] */
+    }
+
+    @else if tune-supports('ie' 7) {
+      @include  _tune-legacy-setting('list-margin'); /* [1, 2] */
+    }
+
+    @if tune-has-hook('list') {
+      @include tune-list; /* [3] */
+    }
+  }
+
+  li > ol,
+  li > ul,
+  li > menu {
+    margin: 0; /* [4] */
+  }
+}
+
+@if tune-supports('ie' 7)
+{
+  /**
+   * ----------------------------------------------------------------------------
+   * Normalize.css
+   * 1. Correct list images handled incorrectly in IE 7.
+   * ----------------------------------------------------------------------------
+   */
+
+  nav ul,
+  nav ol {
+      list-style: none; /* [1] */
+      list-style-image: none; /* [1] */
+  }
+}
+
+@if tune-setting('dd-margin')
+  or tune-supports('ie' 7)
+  or tune-has-hook('dd')
+{
+  /**
+   * ----------------------------------------------------------------------------
+   * Normalize.css
+   * 1. Address margins set differently in IE 6/7.
+   * ----------------------------------------------------------------------------
+   * Tune.css
+   * 2. Allow developer to customize 'dd' default margin
+   * 3. Allow developer to further customize default 'dd' styles
+   */
+
+  dd
+  {
+    @if tune-setting('dd-margin')
+      or tune-supports('ie' 7)
+    {
+      // use 'output-sides' as 'single-direction-margins' setting should not
+      // interfere when developers want to add space between 'dt' and 'dd'.
+      @include sides('margin', tune-setting('dd-margin', 0 0 0 40px)); /* [1, 2] */
+    }
+
+    @if tune-has-hook('dd') {
+      @include tune-dd;
+    }
+  }
+}
+
+@if tune-setting('vertical-rhythm')
+  or tune-has-hook('figure')
+  or tune-setting('figure-margin')
+  or tune-supports('ie' 9, 'safari' 5, 'opera' 11)
+{
+  /**
+   * ----------------------------------------------------------------------------
+   * Normalize.css
+   * 1. Address margin not present in IE 6/7/8/9, Safari 5, and Opera 11.
+   * ----------------------------------------------------------------------------
+   * Tune.css
+   * 2. Set missing margin to value in modern browsers instead of removing it
+   * 3. Allow developers to customize 'figure' default margin
+   * 4. Allow developers to further customize default 'figure' styles
+   */
+
+  figure
+  {
+    @if tune-setting('vertical-rhythm')
+      or tune-setting('figure-margin')
+      or tune-supports('ie' 8, 'safari' 5, 'opera' 11)
+    {
+      @include tune-vertical-rhythm(tune-setting('figure-margin')); /* [1, 2, 3] */
+    }
+
+    @if tune-has-hook('figure') {
+      @include tune-figure;
+    }
+  }
+}
+
+@if tune-setting('hr-border')
+  or tune-has-hook('hr')
+  or tune-supports('firefox')
+  or tune-supports('edge', 'ie')
+{
+  /**
+   * ----------------------------------------------------------------------------
+   * Normalize.css
+   * 1. Add the correct box sizing in Firefox.
+   * 2. Show the overflow in Edge and IE.
+   * ----------------------------------------------------------------------------
+   * Tune.css
+   * 3. Allow developers to customize 'hr' margin, and apply vertical-rhtythm
+   * 4. Allow developers to customize 'hr' default color
+   * 5. Allow developers to further customize default 'hr' styles
+   */
+
+// @Todo: check if outputting only 'border-top' removes double borders in all
+// browsers, or if some browsers need an additional 'border-bottom: 0'
+
+  hr
+  {
+    box-sizing: content-box; /* [1] */
+    height: 0; /* [1] */
+    overflow: visible; /* [2] */
+
+    @if tune-setting('vertical-rhythm')
+      or tune-setting('hr-margin')
+    {
+      @include tune-vertical-rhythm(tune-setting('hr-margin')); /* [3] */
+    }
+
+    @if setting('hr-border') {
+      border-top: tune-setting('hr-border'); /* [4] */
+      // border-bottom: 0;
+    }
+
+    @if tune-has-hook('hr') {
+      @include tune-hr; /* [5] */
+    }
+  }
+}
+
+@if tune-setting('vertical-rhythm')
+  or tune-setting('paragraph-margin')
+  or tune-has-hook('paragraph')
+  or tune-supports('ie' 7)
+{
+  /**
+   * ----------------------------------------------------------------------------
+   * Normalize.css
+   * 1. Address margins set differently in IE 6/7.
+   * ----------------------------------------------------------------------------
+   * 2. Allow developer to customize default 'p' and 'pre' margin
+   * 3. Allow developer to further customize default 'p' and 'pre' styles
+   * ----------------------------------------------------------------------------
+   */
+
+  p,
+  pre
+  {
+    @if tune-setting('vertical-rhythm')
+      or tune-setting('paragraph-margin')
+    {
+      @include tune-vertical-rhythm(tune-setting('paragraph-margin'));
+    }
+
+    @else {
+      margin: _tune-legacy-setting('paragraph-margin');
+    }
+  }
+
+  @if tune-has-hook('paragraph')
+  {
+    p {   
+      @include tune-paragraph; /* [3] */
+    }
+  }
+}
+
+// Apply styles for monospace fonts
+// --------------------------------
+
+@import "tune/partials/monospace-font";
+
+pre {
+  @extend %tune-monospace-font;
+}

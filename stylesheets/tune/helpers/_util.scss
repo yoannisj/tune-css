@@ -1,0 +1,17 @@
+// ============================================================================
+// Tune-css Util Helpers
+// ============================================================================
+
+@import "tune/defaults/utils";
+@import "tune/settings";
+
+// Inject Tune-css defaults
+$tune-util-classnames: map-merge($_tune-util-default-classnames, $tune-util-classnames);
+
+/// tune-util-class($name)
+/// ---------------------------------------------------------------------------
+/// Returns the classname to use for a given utility, as set by the developer.
+
+@function tune-util-classname($name) {
+  @return map-get($tune-util-classnames, $name);
+}

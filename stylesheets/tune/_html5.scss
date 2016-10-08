@@ -1,0 +1,158 @@
+/**
+ * = Tune-css Root
+ * ============================================================================
+ */
+
+@import "tune/helpers/setting";
+@import "tune/helpers/support";
+
+/**
+ * ----------------------------------------------------------------------------
+ * Normalize.css
+ * 1. Add correct display in IE <10.
+ * 2. Add correct display in Edge, IE, and FF <49 for `details` and `summary`.
+ * 3. Add correct display in IE for `main`.
+ * ----------------------------------------------------------------------------
+ */
+
+%tune-html5-block {
+  display: block; /* [1, 2, 3] */
+}
+
+@if tune-supports('ie' 9)
+{
+  article,
+  aside,
+  figcaption,
+  figure,
+  footer,
+  header,
+  main,
+  menu,
+  nav,
+  section,
+  summary {
+    @extend %tune-html5-block; // [1]
+  }
+}
+
+@if tune-supports('ie', 'edge', 'op_mini', 'firefox' 48)
+{
+  details,
+  summary {
+   @extend %tune-html5-block; // [2]
+  }
+}
+
+@if support-browser('ie', 'edge', 'op_mini') {
+  main {
+    @extend %tune-html5-block; // [3]
+  }
+}
+
+@if tune-supports('ie' 9)
+{
+/**
+ * ----------------------------------------------------------------------------
+ * Normalize.css
+ * 1. Add the correct display in IE <10.
+ * ----------------------------------------------------------------------------
+ */
+
+  audio,
+  canvas,
+  progress,
+  video {
+    display: inline-block; /* [1] */
+    
+    @if tune-supports('ie' 7) {
+      *display: inline; /* [1] */
+      *zoom: 1; /* [1] */
+    }
+  }
+}
+
+/**
+ * ----------------------------------------------------------------------------
+ * Normalize.css
+ * 1. Add the correct display and remove excess height in iOS 4-7.
+ * ----------------------------------------------------------------------------
+ */
+
+// @Todo: test for ios <8 support? How?
+
+audio:not([controls])
+{
+  display: none; /* [1] */
+  height: 0; /* [1] */
+}
+
+@if tune-supports('chrome', 'firefox', 'opera')
+{
+/**
+ * ----------------------------------------------------------------------------
+ * Normalize.css
+ * 1. Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ * ----------------------------------------------------------------------------
+ */
+
+  progress {
+    vertical-align: baseline; /* [1] */
+  }
+}
+
+/**
+ * ----------------------------------------------------------------------------
+ * Normalize
+ * 1. Add the correct display in IE <11, Safari <8, and Firefox <22.
+ * 2. Add the correct display in IE.
+ * ----------------------------------------------------------------------------
+ */
+
+%tune-html5-hidden {
+  display: none;
+}
+
+@if tune-supports('ie' 10, 'safari' 7, 'firefox' 22)
+{
+  template {
+    @extend %tune-html5-hidden; /* [1] */
+  }
+}
+
+@if tune-supports('ie', 'op_mini')
+{
+  [hidden] {
+    @extend %tune-html5-hidden; /* [2] */
+  }
+}
+
+// Apply styles for contained objects
+// ----------------------------------
+
+@import "partials/contained-objects";
+
+@if tune-setting('contained-embeds')
+{
+  canvas,
+  video 
+  {
+    @extend %tune-contained-objects;
+  }
+}
+
+
+// Apply styles for baseline objects
+// ---------------------------------
+
+@import "tune/partials/baseline-objects";
+
+@if tune-setting('baseline-objects')
+{
+  audio,
+  canvas,
+  video
+  {
+    @extend %tune-baseline-objects;
+  }
+}

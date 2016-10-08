@@ -1,0 +1,20 @@
+// ============================================================================
+// Tune-css Contained Objects Partial
+// ============================================================================
+
+@if tune-setting('contained-embeds')
+  or tune-setting('contained-forms')
+{
+
+  /**
+   * ----------------------------------------------------------------------------
+   * mrmrs/Fluidity
+   * 1. Make sure elements with fixed/natural width are always contained in
+   *    their parent element
+   * ----------------------------------------------------------------------------
+   */
+
+  %tune-contained-objects {
+    max-width: 100%; /* [1] */
+  }
+}

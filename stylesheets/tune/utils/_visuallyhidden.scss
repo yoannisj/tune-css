@@ -1,0 +1,43 @@
+// ============================================================================
+// Tune-css VisuallyHidden Util
+// ============================================================================
+
+@import "tune/helpers/setting";
+@import "tune/headings";
+
+/**
+ * ----------------------------------------------------------------------------
+ * H5bp
+ * 1. Hide element only visually, but have it available for screen readers:
+ *    @link https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ * 2. Extends the .visuallyhidden class to allow the element to be focusable
+ *    when navigated to via the keyboard:
+ *    @link https://www.drupal.org/node/897638
+ * ----------------------------------------------------------------------------
+ * Tune.css
+ * 3. Allow developer to change the utility's classname
+ * ----------------------------------------------------------------------------
+ */
+
+.#{tune-util-classname('visuallyhidden')} /* [3] */
+{
+  border: 0; /* [1] */
+  clip: rect(0 0 0 0); /* [1] */
+  height: 1px; /* [1] */
+  margin: -1px; /* [1] */
+  overflow: hidden; /* [1] */
+  padding: 0; /* [1] */
+  position: absolute; /* [1] */
+  width: 1px; /* [1] */
+
+  &.#{tune-util-classname('focusable')}:active,
+  &.#{tune-util-classname('focusable')}:focus /* [3] */
+  {
+    clip: auto; /* [2] */
+    height: auto; /* [2] */
+    margin: 0; /* [2] */
+    overflow: visible; /* [2] */
+    position: static; /* [2] */
+    width: auto; /* [2] */
+  }
+}

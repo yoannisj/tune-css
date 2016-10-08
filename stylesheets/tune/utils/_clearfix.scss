@@ -1,0 +1,48 @@
+// ============================================================================
+// Tune-css Clearfix Util
+// ============================================================================
+
+@import "tune/helpers/setting";
+@import "tune/helpers/util";
+
+/**
+ * ----------------------------------------------------------------------------
+ * H5bp
+ * 1. Clearfix contain floated descendent elements
+ * 2. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 3. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ * ----------------------------------------------------------------------------
+ * Tune.css
+ * 4. Allow the use of a clearfix that does not contain the top-margins of
+ *    child elements.
+ * 5. Allow developer to change the utility's classname
+ * ----------------------------------------------------------------------------
+ */
+
+.#{tune-util-classname('clearfix')} /* [5] */
+{
+  @if tune-setting('clearfix-contain-margins')
+  {
+    &:before, /* [4] */
+    &:after {
+      content: " "; /* [2] */
+      display: table; /* [3, 4] */
+    }
+
+    .clearfix:after {
+      clear: both; /* [1] */
+    }
+  }
+
+  @else {
+    &:after {
+      content: " ";
+      display: block; /* [4] */
+      clear: both;
+    }
+  }
+}

@@ -1,0 +1,65 @@
+// ============================================================================
+// Tune-css Browser-Support Helpers
+// ============================================================================
+
+@import "support-for";
+@import 'tune/defaults/support';
+@import "tune/settings";
+
+// Inject Tune-css defaults
+$support-for: map-merge($_tune-support-for, $support-for);
+$support-for-current-browser-version: map-merge(
+  $_tune-current-browser-version,
+  $support-for-current-browser-version
+);
+
+/// tune-supports()
+/// ---------------------------------------------------------------------------
+/// Checks whether the given browser(s) are supported. Accepts a map of browser
+/// names and version ('*' for any version). Accepts one or more browser
+/// definitions (name and optionally version).
+
+@function tune-supports($browsers...)
+{
+  // check for all browsers passed
+  @each $b in $browsers
+  {
+    // allow passing a map of browser versions
+    @if type-of($b) == 'map' {
+      $browsers: _tune-browsers-list($b);
+      @return support-browser($browsers...);
+    }
+
+    // allow passing a browser name with a specific version
+    @if length($b) == 2 {
+      $browser: nth($b, 1);
+      $ver: nth($b, 2);
+      @return support-for($browser, $ver);
+    }
+
+    // allow passing the name of a browser if version is irrelevant
+    @else if map-has-key($support-for, $b) and map-get($support-for, $b) {
+      @return true; 
+    }
+  }
+
+  // return 'false' if no given browser is supported
+  @return false;
+}
+
+/// _tune-browsers-list($browsers)
+/// ---------------------------------------------------------------------------
+/// Converts a map of browser names and version ('*' for any version) into a
+/// list of browser definitions (name and optionally version).
+
+@function _tune-browsers-list($browsers)
+{
+  $res: ();
+
+  @each $name, $ver in $browsers {
+    $def: if($ver == '*', $name, ($name, $ver));
+    $res: append($res, $def);
+  }
+
+  @return $res;
+}
