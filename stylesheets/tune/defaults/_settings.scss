@@ -2,6 +2,8 @@
 // Tune-css Setting Defaults
 // ============================================================================
 
+@import "tune/defaults/common";
+
 $_tune-defaults: (
   // Whether to set vertical rhythm once for all block-level grouping elments.
   // @link http://csswizardry.com/2012/06/single-direction-margin-declarations/
