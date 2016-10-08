@@ -1,48 +1,6 @@
 // ============================================================================
 // = Tune-css Settings
 // ============================================================================
-
-// Common Settings
-// ----------------------------------------------------------------------------
-// Global settings, usually also found in other Sass libraries
-
-// Font-family to set on the 'body' element.
-// @note Opinionated.
-// @default $base-font-family
-$base-font-family: 'Helvetica Neue', Helvetica, Arial, 'sans-serif' !default;
-
-// Font-size to set on the 'body' element.
-// @note used to calculate 'em' values 
-// @note Used to allow users to zoom font-size in IE < 7.
-// @note Opinionated in other browsers.
-$base-font-size: 16px !default;
-
-// Font-size to set on the 'html' element.
-// @note used to calculate 'rem' values
-// @note Used to allow global magnification when using relative units.
-// @default $root-font-size
-$root-font-size: $base-font-size !default;
-
-// Line-height to set on the 'body' element.
-// @note Opinionated.
-// @default $base-background-color
-$base-line-height: 24px !default;
-
-// Background to set on the 'html' element.
-// @note Used to override OS scheme's background and guarantee readability.
-// @default $body-background or #fff
-$body-background: #fff !default;
-$base-background: $body-background !default;
-
-// Color set on the 'hmtl' element.
-// @note Used to override OS scheme's background and guarantee readability.
-// @default $text-color or $body-color or #222
-$body-color: #222 !default;
-$text-color: $body-color !default;
-$base-color: $text-color !default;
-
-// Tune-css Settings
-// ----------------------------------------------------------------------------
 // Settings specific to Tune.css and/or used internally
 
 // Find documentation and default values in 'tune/defaults'.

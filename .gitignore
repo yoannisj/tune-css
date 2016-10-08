@@ -8,6 +8,9 @@ stylesheets/_play.scss
 node_modules
 bower_components
 
+# Log files
+npm-debug.log
+
 # Exclude hidden OS files.
 .DS_Store
 ._*
