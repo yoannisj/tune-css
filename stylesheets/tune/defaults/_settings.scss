@@ -87,7 +87,7 @@ $_tune-defaults: (
   // Customize the border-style used to render 'hr' elements.
   // @note Opinionated.
   // @default null
-  'hr-style': null,
+  'hr-border': null,
 
   // Customize the margin applied to 'p' and 'pre' elements by default.
   // @note Used for normalization in IE < 8.
