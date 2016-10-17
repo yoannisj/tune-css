@@ -75,8 +75,8 @@ html
   *:before, 
   *:after
   {
-    -webkit-box-sizing: inherits; /* [8] */
-    box-sizing: inherits; /* [8] */
+    -webkit-box-sizing: inherit; /* [8] */
+    box-sizing: inherit; /* [8] */
   }
 }
 
